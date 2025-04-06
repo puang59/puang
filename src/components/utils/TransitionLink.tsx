@@ -15,7 +15,6 @@ function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-// Use a global variable to track visited routes
 const visitedRoutes = new Set<string>();
 
 export default function TransitionLink({
@@ -30,17 +29,14 @@ export default function TransitionLink({
   const pathname = usePathname();
   const [isClient, setIsClient] = useState(false);
 
-  // Only run client-side code after component mounts
   useEffect(() => {
     setIsClient(true);
-    // Add current path to visitedRoutes on mount
     if (pathname) {
       visitedRoutes.add(pathname);
     }
   }, [pathname]);
 
-  // Normalize paths for comparison
-  const targetPath = href.split("?")[0] || ""; // Remove query params for comparison and provide default
+  const targetPath = href.split("?")[0] || "";
   const currentPath = pathname || "";
 
   const handleTranstion = async (
@@ -48,18 +44,15 @@ export default function TransitionLink({
   ) => {
     e.preventDefault();
 
-    // If already on the same page, do nothing
     if (currentPath === targetPath) {
       return;
     }
 
     window.dispatchEvent(new CustomEvent("pageTransitionStart"));
 
-    // Use longer sleep duration for first visit to a route
     const isFirstVisit = targetPath && !visitedRoutes.has(targetPath);
     const sleepDuration = isFirstVisit ? 1000 : 200;
 
-    // Add to visited routes
     if (targetPath) {
       visitedRoutes.add(targetPath);
     }
@@ -70,7 +63,6 @@ export default function TransitionLink({
     window.dispatchEvent(new CustomEvent("pageTransitionComplete"));
   };
 
-  // Use a simpler render approach during SSR to avoid hydration mismatches
   return (
     <Link
       onClick={isClient ? handleTranstion : undefined}

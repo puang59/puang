@@ -13,21 +13,17 @@ export default function TransitionWrapper({
   const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   useEffect(() => {
-    // Handle initial page load animation
     if (isInitialLoad) {
-      // Use setTimeout to ensure the animation runs after component mount
       setTimeout(() => {
         setIsInitialLoad(false);
       }, 100);
     }
 
     const handleRouteChangeStart = () => {
-      console.log("Transition started"); // For debugging
       setIsTransitioning(true);
     };
 
     const handleRouteChangeComplete = () => {
-      console.log("Transition completed");
       setTimeout(() => {
         setIsTransitioning(false);
       }, 300);
