@@ -88,15 +88,15 @@ const NavBar = () => {
             <div className="inline-block max-h-full w-0.5 self-stretch bg-neutral-100 dark:bg-white/10"></div>
 
             <TransitionLink
-              href="/blogs"
+              href="/blog"
               className="group relative w-8 h-8 flex items-center justify-center"
-              onMouseEnter={() => setHoveredIcon("blogs")}
+              onMouseEnter={() => setHoveredIcon("blog")}
               onMouseLeave={() => setHoveredIcon(null)}
             >
               {/* Circular background that appears on hover */}
               <div
                 className={`absolute inset-0 rounded-full bg-zinc-800 transition-opacity duration-200 ${
-                  hoveredIcon === "blogs" ? "opacity-100" : "opacity-0"
+                  hoveredIcon === "blog" ? "opacity-100" : "opacity-0"
                 }`}
               ></div>
 
@@ -104,13 +104,13 @@ const NavBar = () => {
                 <RiGitRepositoryFill
                   size={20}
                   className={`${iconStyles} ${
-                    pathname === "/blogs" ? "opacity-100" : "opacity-0"
+                    pathname === "/blog" ? "opacity-100" : "opacity-0"
                   }`}
                 />
                 <RiGitRepositoryLine
                   size={20}
                   className={`${iconStyles} ${
-                    pathname === "/blogs" ? "opacity-0" : "opacity-100"
+                    pathname === "/blog" ? "opacity-0" : "opacity-100"
                   }`}
                 />
               </div>

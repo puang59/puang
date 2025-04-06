@@ -1,4 +1,4 @@
-const experience = [
+const edu = [
   {
     title: "Vellore Insititute of Technology",
     position: "b.tech computer science",
@@ -9,21 +9,21 @@ const experience = [
 
 export default function Education() {
   return (
-    <div className="text-white ">
+    <div className="mb-16 text-white ">
       <h1 className="text-2xl font-bold text-white">
         <span className="text-green-300">&gt;</span> education
       </h1>
       <div className="mt-10">
-        {experience.map((exp) => (
-          <div key={exp.title} className="mt-10 group">
+        {edu.map((ed) => (
+          <div key={ed.title} className="mt-10 group">
             <a
-              href={exp.link}
+              href={ed.link}
               className="text-xl font-bold transition-all duration-300 ease-in-out group-hover:text-green-300"
             >
-              {exp.title}
+              {ed.title}
             </a>
             <p className="text-gray-500 text-xs mt-2">
-              {exp.position} | {exp.date}
+              {ed.position} | {ed.date}
             </p>
           </div>
         ))}

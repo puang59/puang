@@ -17,9 +17,12 @@
 		"@remixicon/react": "^4.6.0",
 		"@t3-oss/env-nextjs": "^0.12.0",
 		"framer-motion": "^12.6.3",
+		"gray-matter": "^4.0.3",
 		"next": "^15.2.3",
+		"next-mdx-remote": "^5.0.0",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
+		"shiki": "^3.2.1",
 		"zod": "^3.24.2"
 	},
 	"devDependencies": {

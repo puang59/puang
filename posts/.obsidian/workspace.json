@@ -1,0 +1,197 @@
+{
+  "main": {
+    "id": "e4c2aca838c8d65d",
+    "type": "split",
+    "children": [
+      {
+        "id": "9068ea32b1796d1c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ac4b7d9b247d731c",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.8.7"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.8.7"
+            }
+          },
+          {
+            "id": "ebcdd1e6083be08e",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d74f209e2120b08b",
+    "type": "split",
+    "children": [
+      {
+        "id": "6ba2d77a9daeec1c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3d4fb0defd58f4fb",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "ae8f368f2b8b9341",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "15fe07c3b411b02c",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "659c17b91d71d99e",
+    "type": "split",
+    "children": [
+      {
+        "id": "a9fdd1f2dd251eeb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a975d6806593b557",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "what is a good website.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for what is a good website"
+            }
+          },
+          {
+            "id": "1bf82a9443829b39",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "what is a good website.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from what is a good website"
+            }
+          },
+          {
+            "id": "781e27f678d68982",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "b0d0ff145b19b0c1",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "what is a good website.md"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of what is a good website"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "3d4fb0defd58f4fb",
+  "lastOpenFiles": [
+    "notes/elixir.md",
+    "notes",
+    "http-server.md",
+    "retro-website.md",
+    "swayqwam dfsdf.md",
+    "public/puang.jpg.md",
+    "public",
+    "media-production.md",
+    "emacs-workflow.md",
+    "Screenshot 2025-02-16 at 6.39.17 PM.png",
+    "hello-website.md",
+    "retro-website",
+    "retro.md",
+    "connect-obsidian.md",
+    "2024-12-22.md",
+    "what is a good website.md",
+    "Untitled.canvas",
+    "create a link.md",
+    "Welcome.md"
+  ]
+}
