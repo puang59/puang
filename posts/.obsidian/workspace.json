@@ -8,29 +8,20 @@
         "type": "tabs",
         "children": [
           {
-            "id": "ac4b7d9b247d731c",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.8.7"
-              },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.8.7"
-            }
-          },
-          {
             "id": "ebcdd1e6083be08e",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "emacs-workflow.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "emacs-workflow"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -103,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "what is a good website.md",
+                "file": "emacs-workflow.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -113,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for what is a good website"
+              "title": "Backlinks for emacs-workflow"
             }
           },
           {
@@ -172,7 +163,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "3d4fb0defd58f4fb",
+  "active": "ebcdd1e6083be08e",
   "lastOpenFiles": [
     "notes/elixir.md",
     "notes",

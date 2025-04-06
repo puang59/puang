@@ -2,7 +2,6 @@
 title: "How I use emacs org-mode"
 date: "2023-04-14"
 ---
-
 A few years ago, I began using GNU Emacs because I was inspired by the adoration for org-mode within the Emacs community and how creatively they utilized it.
 I couldn't resist trying out this beautiful piece of software for myself.
 
