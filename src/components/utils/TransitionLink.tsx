@@ -15,6 +15,9 @@ function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+// Use a global variable to track visited routes
+const visitedRoutes = new Set<string>();
+
 export default function TransitionLink({
   children,
   href,
@@ -30,11 +33,15 @@ export default function TransitionLink({
   // Only run client-side code after component mounts
   useEffect(() => {
     setIsClient(true);
-  }, []);
+    // Add current path to visitedRoutes on mount
+    if (pathname) {
+      visitedRoutes.add(pathname);
+    }
+  }, [pathname]);
 
   // Normalize paths for comparison
-  const targetPath = href.split("?")[0]; // Remove query params for comparison
-  const currentPath = pathname;
+  const targetPath = href.split("?")[0] || ""; // Remove query params for comparison and provide default
+  const currentPath = pathname || "";
 
   const handleTranstion = async (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
@@ -47,7 +54,17 @@ export default function TransitionLink({
     }
 
     window.dispatchEvent(new CustomEvent("pageTransitionStart"));
-    await sleep(200);
+
+    // Use longer sleep duration for first visit to a route
+    const isFirstVisit = targetPath && !visitedRoutes.has(targetPath);
+    const sleepDuration = isFirstVisit ? 1000 : 200;
+
+    // Add to visited routes
+    if (targetPath) {
+      visitedRoutes.add(targetPath);
+    }
+
+    await sleep(sleepDuration);
     router.push(href);
 
     window.dispatchEvent(new CustomEvent("pageTransitionComplete"));
