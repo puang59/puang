@@ -51,7 +51,7 @@ export default function TransitionLink({
     window.dispatchEvent(new CustomEvent("pageTransitionStart"));
 
     const isFirstVisit = targetPath && !visitedRoutes.has(targetPath);
-    const sleepDuration = isFirstVisit ? 1000 : 200;
+    const sleepDuration = isFirstVisit ? 1500 : 200;
 
     if (targetPath) {
       visitedRoutes.add(targetPath);
