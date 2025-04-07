@@ -3,6 +3,7 @@ import NavBar from "~/components/NavBar";
 import TransitionWrapper from "~/components/utils/TransitionWrapper";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { PostHogProvider } from "~/components/PostHogProvider";
 
 const geistSans = Geist({
   subsets: ["latin"],
@@ -52,12 +53,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground font-mono`}
       >
-        <div className="fixed top-0 left-0 right-0 h-20 bg-gradient-to-b from-black via-black/60 to-transparent pointer-events-none z-40"></div>
-        <div className="content-fade-mask">
-          <TransitionWrapper>{children}</TransitionWrapper>
-        </div>
-        <NavBar />
-        <div className="fixed bottom-0 left-0 right-0 h-5 bg-gradient-to-t from-black via-black/60 to-transparent pointer-events-none z-40"></div>
+        <PostHogProvider>
+          <div className="fixed top-0 left-0 right-0 h-20 bg-gradient-to-b from-black via-black/60 to-transparent pointer-events-none z-40"></div>
+          <div className="content-fade-mask">
+            <TransitionWrapper>{children}</TransitionWrapper>
+          </div>
+          <NavBar />
+          <div className="fixed bottom-0 left-0 right-0 h-5 bg-gradient-to-t from-black via-black/60 to-transparent pointer-events-none z-40"></div>
+        </PostHogProvider>
       </body>
     </html>
   );

@@ -69,7 +69,7 @@ export async function GET(request: Request) {
               flexShrink: 0,
             }}
           >
-            ~
+            //
           </span>
           <h1
             style={{

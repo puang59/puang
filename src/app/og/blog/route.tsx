@@ -61,12 +61,12 @@ export async function GET(request: Request) {
         >
           <span
             style={{
-              color: "#f59e0b",
+              color: "#86efac",
               fontSize: 48,
               flexShrink: 0,
             }}
           >
-            *
+            &gt;
           </span>
           <h1
             style={{
