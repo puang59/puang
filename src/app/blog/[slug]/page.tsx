@@ -2,13 +2,16 @@ import { notFound } from "next/navigation";
 import { MDX } from "./mdx";
 import { getPostBySlug } from "~/components/utils/blog";
 import BackButton from "~/components/BackButton";
-// @ts-ignore - Next.js 15 type issue
+
+type SlugParams = { slug: string };
+
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<SlugParams>;
 }) {
-  const post = getPostBySlug(params.slug);
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
   if (!post) {
     return;
   }
@@ -42,9 +45,13 @@ export async function generateMetadata({
   };
 }
 
-// @ts-ignore - Next.js 15 type issue
-export default async function Post({ params }: { params: { slug: string } }) {
-  const post = getPostBySlug(params.slug);
+export default async function Post({
+  params,
+}: {
+  params: Promise<SlugParams>;
+}) {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
   if (!post) {
     notFound();
   }

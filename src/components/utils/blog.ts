@@ -16,21 +16,25 @@ export type MDXFileData = FrontmatterParseResult & {
   slug: string;
 };
 
+const postsCache = new Map<string, MDXFileData>();
+
 export function getPosts(): MDXFileData[] {
   return getMDXData(path.join(process.cwd(), "posts"));
 }
 
 export function getPostBySlug(slug: string): MDXFileData | null {
-  console.log("Fetching post for slug:", slug);
+  // Check cache first
+  if (postsCache.has(slug)) {
+    return postsCache.get(slug) || null;
+  }
 
   const posts = getPosts();
-  console.log(
-    "Available posts:",
-    posts.map((p) => p.slug)
-  );
-
   const foundPost = posts.find((post) => post.slug === slug) ?? null;
-  console.log("Found post:", foundPost);
+
+  // Cache the result
+  if (foundPost) {
+    postsCache.set(slug, foundPost);
+  }
 
   return foundPost;
 }
