@@ -84,7 +84,7 @@ body::after {
   will-change: opacity, filter;
 }
 
-.page-transtion {
+.page-transition {
   opacity: 0;
   filter: blur(12px);
   transform: translateY(10px);

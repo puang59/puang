@@ -32,7 +32,7 @@ export default function Blogs() {
   blogs.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
-    <main className="flex min-h-screen flex-col text-white p-8 md:p-16 lg:p-24 max-w-3xl mx-auto mt-5 md:mt-0">
+    <main className="flex min-h-screen flex-col text-white p-8 md:p-16 lg:p-24 max-w-4xl mx-auto mt-5 md:mt-0">
       <div className="flex-1">
         <h1 className="text-3xl text-white font-bold mb-10">
           <span className="text-green-300">&gt;</span> blogs

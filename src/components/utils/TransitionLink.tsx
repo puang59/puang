@@ -48,17 +48,18 @@ export default function TransitionLink({
       return;
     }
 
+    // starting animation here
     window.dispatchEvent(new CustomEvent("pageTransitionStart"));
 
-    const isFirstVisit = targetPath && !visitedRoutes.has(targetPath);
+    await sleep(300);
+
+    router.push(href);
 
     if (targetPath) {
       visitedRoutes.add(targetPath);
     }
 
-    await sleep(isFirstVisit ? 500 : 150);
-    router.push(href);
-    await sleep(isFirstVisit ? 500 : 150);
+    await sleep(100);
 
     window.dispatchEvent(new CustomEvent("pageTransitionComplete"));
   };
@@ -71,7 +72,7 @@ export default function TransitionLink({
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       {...props}
-      prefetch={false}
+      prefetch={true}
     >
       {children}
     </Link>

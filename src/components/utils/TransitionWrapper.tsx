@@ -26,7 +26,7 @@ export default function TransitionWrapper({
     const handleRouteChangeComplete = () => {
       setTimeout(() => {
         setIsTransitioning(false);
-      }, 300);
+      }, 50);
     };
 
     window.addEventListener("pageTransitionStart", handleRouteChangeStart);
@@ -46,9 +46,8 @@ export default function TransitionWrapper({
 
   return (
     <div
-      className={`transition-wrapper ${
-        isTransitioning ? "page-transtion" : ""
-      } ${isInitialLoad ? "initial-load" : ""}`}
+      className={`transition-wrapper ${isTransitioning ? "page-transition" : ""
+        } ${isInitialLoad ? "initial-load" : ""}`}
     >
       {children}
     </div>

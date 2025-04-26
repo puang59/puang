@@ -6,7 +6,7 @@ import Socials from "~/components/Socials";
 
 export default function HomePage() {
   return (
-    <main className="flex min-h-screen flex-col text-white p-8 md:p-16 lg:p-24 max-w-3xl mx-auto">
+    <main className="flex min-h-screen flex-col text-white p-8 md:p-16 lg:p-24 max-w-4xl mx-auto">
       <div className="mt-10 md:mt-0 mb-10 flex flex-row items-center gap-5 border border-zinc-800 p-4 ">
         <div>
           <div className="overflow-hidden flex items-center justify-center">
