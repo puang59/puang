@@ -1,13 +1,28 @@
 const experience = [
   {
-    title: "devknit",
-    position: "cofounder and cto",
-    date: "(aug 2024 - present)",
+    title: "ploglabs",
+    position: "cofounder",
+    date: "(june 2025 - present)",
     description:
-      "building a platform for developers to share their projects and learn from each other",
-    link: "https://devknit.com",
+      "a lab where we turn ai into practical tools that solve real problems for real people — fast, useful, and built for everyone.",
+    link: "https://ploglabs.com",
   },
-
+  {
+    title: "devdoq",
+    position: "cofounder",
+    date: "(july 2025 - present)",
+    description:
+      "a tool that turns your codebase into living, ai generated docs synced to your repo. never outdated, always clear, and ready to onboard newcomers effortlessly",
+    link: "https://devdoq.com",
+  },
+  {
+    title: "aizonics",
+    position: "full stack developer",
+    date: "(may 2025 - july 2025)",
+    description:
+      "built a scalable api architecture with failure fallbacks and ratelimits, ensuring high availability and performance",
+    link: "https://aizonics.com",
+  },
   {
     title: "greendot aviation",
     position: "chief vfx artist",
@@ -22,7 +37,7 @@ export default function Experience() {
   return (
     <div className="text-white mb-16">
       <h1 className="text-2xl font-bold text-white">
-        <span className="text-green-300">&gt;</span> worked at
+        <span className="text-green-300">&gt;</span> work
       </h1>
       <div className="mt-10">
         {experience.map((exp) => (

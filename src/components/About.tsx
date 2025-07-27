@@ -12,19 +12,18 @@ export default function About() {
 
       <div className="space-y-5 text-sm">
         <p className="text-gray-300 leading-relaxed tracking-wide">
-          19 y/o cs undergrad who learns best by breaking things and putting
-          them back together. I build stuff—mostly with code, sometimes with
+          19 y/o cs undergrad. i build things—mostly with code, sometimes
           hardware
         </p>
 
         <p className="text-gray-300 leading-relaxed tracking-wide">
-          i like making ideas real and seeing how far I can push them. I'm
-          curious by default, and I get things done quietly
+          i like taking ideas and pushing them till they turn into something
+          real. curious by default, get things done without much noise
         </p>
 
         <p className="text-gray-300 leading-relaxed tracking-wide">
-          into retro tech, low-level systems, and tinkering. Also love media
-          production and working with cameras
+          into retro tech, low-level systems, and random tinkering. also into
+          books, media stuff, and working with cameras
         </p>
       </div>
     </section>
