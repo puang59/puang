@@ -1,5 +1,6 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
+import Image from "next/image";
 import { Children, createElement, isValidElement } from "react";
 import { codeToHtml } from "shiki";
 
@@ -62,12 +63,16 @@ function CustomLink({
 
 function CustomImage(props: React.ImgHTMLAttributes<HTMLImageElement>) {
   return (
-    <img
-      alt={props.alt}
+    <Image
+      alt={props.alt || ""}
       className="my-8 rounded-lg"
-      {...props}
+      src={props.src || ""}
       width={800}
       height={400}
+      style={{
+        maxWidth: "100%",
+        height: "auto",
+      }}
     />
   );
 }

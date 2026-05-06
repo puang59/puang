@@ -7,7 +7,12 @@ import "./src/env.js";
 /** @type {import("next").NextConfig} */
 const config = {
   images: {
-    domains: ["i.pinimg.com", "avatars.githubusercontent.com"],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**', // This wildcard allows all HTTPS domains
+      },
+    ],
   },
   typescript: {
     // !! WARN !!

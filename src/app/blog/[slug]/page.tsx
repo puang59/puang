@@ -1,7 +1,14 @@
 import { notFound } from "next/navigation";
 import { MDX } from "./mdx";
-import { getPostBySlug } from "~/components/utils/blog";
+import { getPostBySlug, getPosts } from "~/components/utils/blog";
 import BackButton from "~/components/BackButton";
+
+export async function generateStaticParams() {
+  const posts = getPosts();
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
 
 type SlugParams = { slug: string };
 
