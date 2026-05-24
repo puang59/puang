@@ -179,13 +179,13 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "6e57bdada67991d9",
+  "active": "3d4fb0defd58f4fb",
   "lastOpenFiles": [
-    "retro-website.md",
-    "Untitled.md",
-    "programming.md",
     "media-production.md",
     "http-server.md",
+    "programming.md",
+    "retro-website.md",
+    "Untitled.md",
     "emacs-workflow.md",
     "notes/elixir.md",
     "notes",
