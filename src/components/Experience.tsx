@@ -18,12 +18,12 @@ const experience = [
     link: "https://devdoq.com",
   },
   {
-    title: "aizonics",
+    title: "thinkdeck",
     position: "full stack developer",
     date: "(may 2025 - july 2025)",
     description:
       "built a scalable api architecture with failure fallbacks and ratelimits, ensuring high availability and performance",
-    link: "https://aizonics.com",
+    link: "https://thinkdeck.site",
   },
   {
     title: "greendot aviation",
