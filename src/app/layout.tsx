@@ -59,12 +59,10 @@ export default function RootLayout({
 					strategy="afterInteractive"
 				/>
 				<PostHogProvider>
-					<div className="pointer-events-none fixed top-0 right-0 left-0 z-40 h-20 bg-gradient-to-b from-black via-black/60 to-transparent"></div>
 					<div className="content-fade-mask">
 						<TransitionWrapper>{children}</TransitionWrapper>
 					</div>
 					<NavBar />
-					<div className="pointer-events-none fixed right-0 bottom-0 left-0 z-40 h-5 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
 				</PostHogProvider>
 			</body>
 		</html>

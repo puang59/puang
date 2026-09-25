@@ -22,7 +22,7 @@ export function ProjectCard({ project }: { project: Project }) {
 	const primary = project.links[0];
 
 	return (
-		<div className="group relative flex flex-col rounded-md border border-zinc-800 bg-black/40 p-6 transition-colors duration-500 hover:border-green-300/60 sm:p-8">
+		<div className="group relative flex flex-col border border-zinc-800 bg-black/40 p-6 sm:p-8">
 			{primary && (
 				<a
 					href={primary.url}
@@ -35,7 +35,7 @@ export function ProjectCard({ project }: { project: Project }) {
 				</a>
 			)}
 
-			<div className="mb-2 flex items-start justify-between gap-3">
+			<div className="mb-3 flex items-start justify-between gap-3">
 				<h3 className="font-bold text-white text-xl transition-colors duration-300 group-hover:text-green-300">
 					{project.title}
 				</h3>
@@ -51,15 +51,20 @@ export function ProjectCard({ project }: { project: Project }) {
 					})()}
 			</div>
 
-			<p className="mb-4 max-w-3xl text-gray-400 text-sm leading-relaxed sm:text-[15px]">
-				{project.description}
-			</p>
+			<ul className="mb-4 max-w-3xl space-y-1.5 text-gray-400 text-sm leading-relaxed sm:text-[15px]">
+				{project.description.map((point) => (
+					<li key={point} className="flex gap-2.5">
+						<span className="mt-[0.45em] h-1 w-1 shrink-0 bg-green-300/70" />
+						<span>{point}</span>
+					</li>
+				))}
+			</ul>
 
 			<div className="mb-4 flex flex-wrap gap-1.5">
 				{project.technologies.map((tech) => (
 					<span
 						key={tech}
-						className="rounded-full border border-zinc-800 px-2.5 py-1 text-[11px] text-gray-400 transition-colors duration-500 group-hover:border-green-300/30"
+						className="border border-zinc-800 px-2.5 py-1 text-[11px] text-gray-400"
 					>
 						{tech}
 					</span>

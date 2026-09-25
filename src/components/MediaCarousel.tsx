@@ -9,6 +9,7 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import type { MediaItem } from "./Projects";
 
 declare global {
@@ -28,9 +29,14 @@ export function MediaCarousel({
 }) {
 	const [index, setIndex] = useState(0);
 	const [lightboxOpen, setLightboxOpen] = useState(false);
+	const [mounted, setMounted] = useState(false);
 	const tweetRef = useRef<HTMLDivElement>(null);
 
 	const current = media[index];
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
 
 	useEffect(() => {
 		if (current?.type === "tweet") {
@@ -73,7 +79,7 @@ export function MediaCarousel({
 
 	return (
 		<>
-			<div className="relative aspect-video w-full overflow-hidden rounded-md border border-zinc-800 bg-zinc-950">
+			<div className="relative aspect-video w-full overflow-hidden border border-zinc-800 bg-zinc-950">
 				{current.type === "image" && (
 					<button
 						type="button"
@@ -89,7 +95,7 @@ export function MediaCarousel({
 							className="object-cover"
 						/>
 						<span className="absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 transition-all duration-200 group-hover/image:bg-black/30 group-hover/image:opacity-100">
-							<span className="flex h-9 w-9 items-center justify-center rounded-full bg-black/70 text-gray-200">
+							<span className="flex h-9 w-9 items-center justify-center bg-black/70 text-gray-200">
 								<RiZoomInLine size={18} />
 							</span>
 						</span>
@@ -132,7 +138,7 @@ export function MediaCarousel({
 							type="button"
 							aria-label="Previous media"
 							onClick={(e) => goTo(index - 1, e)}
-							className="-translate-y-1/2 absolute top-1/2 left-2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-black/70 text-gray-300 opacity-80 transition-colors duration-200 hover:bg-black/90 hover:text-green-300 focus:opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
+							className="-translate-y-1/2 absolute top-1/2 left-2 z-10 flex h-8 w-8 items-center justify-center bg-black/70 text-gray-300 opacity-80 transition-colors duration-200 hover:bg-black/90 hover:text-green-300 focus:opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
 						>
 							<RiArrowLeftSLine size={18} />
 						</button>
@@ -140,7 +146,7 @@ export function MediaCarousel({
 							type="button"
 							aria-label="Next media"
 							onClick={(e) => goTo(index + 1, e)}
-							className="-translate-y-1/2 absolute top-1/2 right-2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-black/70 text-gray-300 opacity-80 transition-colors duration-200 hover:bg-black/90 hover:text-green-300 focus:opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
+							className="-translate-y-1/2 absolute top-1/2 right-2 z-10 flex h-8 w-8 items-center justify-center bg-black/70 text-gray-300 opacity-80 transition-colors duration-200 hover:bg-black/90 hover:text-green-300 focus:opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
 						>
 							<RiArrowRightSLine size={18} />
 						</button>
@@ -154,7 +160,7 @@ export function MediaCarousel({
 										type="button"
 										aria-label={`Go to slide ${i + 1}`}
 										onClick={(e) => goTo(i, e)}
-										className={`h-1.5 w-1.5 rounded-full transition-colors duration-200 ${
+										className={`h-1.5 w-1.5 transition-colors duration-200 ${
 											i === index ? "bg-green-300" : "bg-gray-500"
 										}`}
 									/>
@@ -165,41 +171,45 @@ export function MediaCarousel({
 				)}
 			</div>
 
-			<AnimatePresence>
-				{lightboxOpen && current.type === "image" && (
-					<motion.div
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						exit={{ opacity: 0 }}
-						transition={{ duration: 0.18 }}
-						onClick={closeLightbox}
-						className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 sm:p-10"
-					>
-						<motion.div
-							initial={{ scale: 0.85, opacity: 0 }}
-							animate={{ scale: 1, opacity: 1 }}
-							exit={{ scale: 0.9, opacity: 0 }}
-							transition={{ duration: 0.2, ease: "easeOut" }}
-							onClick={(e) => e.stopPropagation()}
-							className="relative w-full max-w-5xl"
-						>
-							<img
-								src={current.src}
-								alt={current.alt}
-								className="max-h-[85vh] w-full rounded-md object-contain"
-							/>
-							<button
-								type="button"
-								aria-label="Close"
+			{mounted &&
+				createPortal(
+					<AnimatePresence>
+						{lightboxOpen && current.type === "image" && (
+							<motion.div
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								exit={{ opacity: 0 }}
+								transition={{ duration: 0.18 }}
 								onClick={closeLightbox}
-								className="-top-3 -right-3 absolute flex h-9 w-9 items-center justify-center rounded-full border border-zinc-700 bg-black text-gray-300 transition-colors hover:border-green-300 hover:text-green-300"
+								className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 sm:p-10"
 							>
-								<RiCloseLine size={18} />
-							</button>
-						</motion.div>
-					</motion.div>
+								<motion.div
+									initial={{ scale: 0.85, opacity: 0 }}
+									animate={{ scale: 1, opacity: 1 }}
+									exit={{ scale: 0.9, opacity: 0 }}
+									transition={{ duration: 0.2, ease: "easeOut" }}
+									onClick={(e) => e.stopPropagation()}
+									className="relative w-full max-w-5xl"
+								>
+									<img
+										src={current.src}
+										alt={current.alt}
+										className="max-h-[85vh] w-full object-contain"
+									/>
+									<button
+										type="button"
+										aria-label="Close"
+										onClick={closeLightbox}
+										className="-top-3 -right-3 absolute flex h-9 w-9 items-center justify-center border border-zinc-700 bg-black text-gray-300 transition-colors hover:border-green-300 hover:text-green-300"
+									>
+										<RiCloseLine size={18} />
+									</button>
+								</motion.div>
+							</motion.div>
+						)}
+					</AnimatePresence>,
+					document.body,
 				)}
-			</AnimatePresence>
 		</>
 	);
 }

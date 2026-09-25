@@ -11,7 +11,7 @@ export type ProjectLink = {
 
 export type Project = {
 	title: string;
-	description: string;
+	description: string[];
 	technologies: string[];
 	stats?: string[];
 	media: MediaItem[];
@@ -21,8 +21,12 @@ export type Project = {
 export const projectList: Project[] = [
 	{
 		title: "devdoq",
-		description:
-			"An AI-powered developer documentation platform that automatically analyzes entire codebases to generate docs, API references, and a visual codebase mindmap. Uses CocoIndex for vector indexing and intelligent code chunking, with BullMQ-backed background workers handling multi-threaded generation for large repositories — plus a chat interface for talking directly to your code.",
+		description: [
+			"AI-powered platform that analyzes entire codebases to auto-generate docs, API references, and a visual codebase mindmap.",
+			"Uses CocoIndex for vector indexing and intelligent code chunking.",
+			"BullMQ-backed background workers handle multi-threaded doc generation for large repos.",
+			"Chat interface for talking directly to your code.",
+		],
 		technologies: [
 			"Next.js",
 			"Convex",
@@ -40,8 +44,12 @@ export const projectList: Project[] = [
 	},
 	{
 		title: "nuza",
-		description:
-			"A lightning-fast, privacy-first, open-source alternative to Obsidian — a native Tauri + React desktop app with a strictly local file-system approach. Ships with native Vim keybindings, a CodeMirror 6 editor core, and a minimalist UI designed to stay out of your way, with zero cloud dependency.",
+		description: [
+			"Lightning-fast, privacy-first open-source alternative to Obsidian.",
+			"Native Tauri + React desktop app with a strictly local file-system approach.",
+			"Ships with native Vim keybindings and a CodeMirror 6 editor core.",
+			"Minimalist UI with zero cloud dependency.",
+		],
 		technologies: [
 			"Tauri",
 			"React",
@@ -65,8 +73,12 @@ export const projectList: Project[] = [
 	},
 	{
 		title: "tars",
-		description:
-			"An AI clipboard companion that lives behind a global hotkey — invoke it anywhere and it reads your clipboard or on-screen context to answer questions instantly through an LLM without breaking your flow. Built as a Tauri desktop app with a React frontend and Supabase for history sync.",
+		description: [
+			"AI clipboard companion invoked anywhere via a global hotkey.",
+			"Reads your clipboard or on-screen context to answer questions instantly through an LLM.",
+			"Built as a Tauri desktop app with a React frontend.",
+			"Supabase-backed history sync.",
+		],
 		technologies: ["Tauri", "React", "TypeScript", "Groq", "Supabase", "Vite"],
 		media: [
 			{ type: "image", src: "/tars/cover1.png", alt: "tars preview 1" },
@@ -86,8 +98,12 @@ export const projectList: Project[] = [
 	},
 	{
 		title: "molly",
-		description:
-			"A terminal-native, realtime Discord chat client built with Charm's Bubble Tea TUI framework — full messaging, channel switching, DMs, and notifications, all rendered as a fast, keyboard-driven terminal UI backed by a WebSocket connection and a local SQLite cache.",
+		description: [
+			"Terminal-native, realtime Discord chat client built with Charm's Bubble Tea.",
+			"Full messaging, channel switching, DMs, and notifications.",
+			"Fast, keyboard-driven TUI.",
+			"WebSocket connection backed by a local SQLite cache.",
+		],
 		technologies: ["Go", "Bubble Tea", "WebSocket", "SQLite"],
 		stats: ["40+ GitHub stars"],
 		media: [
@@ -104,8 +120,12 @@ export const projectList: Project[] = [
 	},
 	{
 		title: "zeno",
-		description:
-			"A terminal-native coding agent that runs entirely on your machine — it reads your local codebase, git history, and files to investigate issues and ship changes right from the CLI, calling out to an LLM via the OpenAI SDK only when it needs reasoning, while file and git operations stay local.",
+		description: [
+			"Terminal-native coding agent that runs entirely on your machine.",
+			"Reads your local codebase, git history, and files to investigate issues and ship changes from the CLI.",
+			"Calls an LLM via the OpenAI SDK only when reasoning is needed.",
+			"File and git operations stay fully local.",
+		],
 		technologies: ["TypeScript", "Bun", "OpenAI SDK", "Zod"],
 		media: [
 			{ type: "image", src: "/zeno/cover.jpeg", alt: "zeno preview" },
@@ -121,8 +141,12 @@ export const projectList: Project[] = [
 	},
 	{
 		title: "xtoxic",
-		description:
-			"A real-time Twitter toxicity analyzer built and shipped in under an hour — paste a handle and Exa pulls their recent tweets, which Gemini scores for toxicity through the Vercel AI SDK, streaming back an instant breakdown.",
+		description: [
+			"Real-time Twitter toxicity analyzer built and shipped in under an hour.",
+			"Exa pulls a handle's recent tweets.",
+			"Gemini scores them for toxicity via the Vercel AI SDK.",
+			"Streams back an instant breakdown.",
+		],
 		technologies: ["Next.js", "Exa", "Gemini", "Vercel AI SDK"],
 		stats: ["12,000+ users", "50K+ impressions / 12hr", "30+ GitHub stars"],
 		media: [
@@ -139,8 +163,12 @@ export const projectList: Project[] = [
 	},
 	{
 		title: "http-server",
-		description:
-			"A multi-threaded HTTP server written entirely from scratch in C — raw POSIX sockets, a thread-per-connection model, a hand-rolled request parser with regex-based routing, MIME type detection, and URL decoding, tuned to serve static files at high throughput with a small memory footprint.",
+		description: [
+			"Multi-threaded HTTP server written entirely from scratch in C.",
+			"Raw POSIX sockets with a thread-per-connection model.",
+			"Hand-rolled request parser with regex-based routing, MIME detection, and URL decoding.",
+			"Tuned for high throughput with a small memory footprint.",
+		],
 		technologies: ["C", "Linux", "Sockets", "POSIX Threads", "Regex"],
 		stats: ["9,000+ RPS", "99.99% uptime", "2.8ms latency"],
 		media: [
@@ -165,8 +193,12 @@ export const projectList: Project[] = [
 	},
 	{
 		title: "lexit",
-		description:
-			"A personal vocabulary builder that generates AI-powered definitions and usage examples with Gemini, then saves each word to a real-time Convex database so it's instantly searchable across devices. Includes Clerk auth and Upstash-backed rate limiting on the AI endpoints.",
+		description: [
+			"Personal vocabulary builder with AI-generated definitions and usage examples via Gemini.",
+			"Saves each word to a real-time Convex database, instantly searchable across devices.",
+			"Clerk authentication.",
+			"Upstash-backed rate limiting on the AI endpoints.",
+		],
 		technologies: ["Next.js", "Convex", "Gemini AI", "Clerk", "Zustand"],
 		media: [
 			{ type: "image", src: "/lexit/cover.png", alt: "lexit preview" },
@@ -183,8 +215,12 @@ export const projectList: Project[] = [
 	},
 	{
 		title: "internode",
-		description:
-			"A self-hosted search engine — a Go backend built on Gin and Colly that recursively crawls and indexes the web, exposing search and quick-search endpoints, paired with a Next.js frontend for querying the index in real time.",
+		description: [
+			"Self-hosted search engine.",
+			"Go backend (Gin + Colly) that recursively crawls and indexes the web.",
+			"Exposes search and quick-search endpoints.",
+			"Next.js frontend for real-time querying.",
+		],
 		technologies: ["Go", "Gin", "Colly", "Next.js", "TypeScript"],
 		media: [
 			{ type: "image", src: "/internode/cover.jpeg", alt: "internode preview" },
@@ -200,8 +236,12 @@ export const projectList: Project[] = [
 	},
 	{
 		title: "wallgrab",
-		description:
-			"An interactive CLI to search and download high-resolution wallpapers from Wallhaven — run it with no arguments for a guided terminal wizard built on Clack, or pass flags via Commander for scripting. Skips wallpapers you've already downloaded and auto-opens the destination folder when done.",
+		description: [
+			"Interactive CLI to search and download high-res wallpapers from Wallhaven.",
+			"Guided terminal wizard (Clack) or scriptable flag mode (Commander).",
+			"Skips wallpapers you've already downloaded.",
+			"Auto-opens the destination folder when done.",
+		],
 		technologies: ["TypeScript", "Bun", "Commander", "Clack"],
 		stats: ["128+ downloads"],
 		media: [
@@ -223,8 +263,12 @@ export const projectList: Project[] = [
 	},
 	{
 		title: "smacknet",
-		description:
-			"A browser-based network-attack tool for launching and monitoring HTTP/TCP load tests — configure attack methods, proxy pools, and user agents from a Next.js dashboard, with Web Workers running the traffic generation and Socket.IO streaming live stats back to the UI.",
+		description: [
+			"Browser-based network-attack tool for launching and monitoring HTTP/TCP load tests.",
+			"Configure attack methods, proxy pools, and user agents from a Next.js dashboard.",
+			"Web Workers run the traffic generation.",
+			"Socket.IO streams live stats back to the UI.",
+		],
 		technologies: ["Next.js", "TypeScript", "Socket.IO", "Web Workers"],
 		media: [
 			{ type: "youtube", id: "S5Fwc5TDXHo" },
@@ -241,8 +285,12 @@ export const projectList: Project[] = [
 	},
 	{
 		title: "FileEase",
-		description:
-			"A CLI tool that keeps your filesystem tidy — sorts files into folders by keyword or extension, with built-in Fernet-based file encryption/decryption and zip compress/extract utilities, all wrapped in a Click-powered interactive interface.",
+		description: [
+			"CLI tool that keeps your filesystem tidy.",
+			"Sorts files into folders by keyword or extension.",
+			"Built-in Fernet-based file encryption and decryption.",
+			"Zip compress/extract utilities in a Click-powered interface.",
+		],
 		technologies: ["Python", "Click", "Cryptography"],
 		media: [
 			{ type: "image", src: "/FileEase/cover.png", alt: "FileEase preview" },
@@ -259,8 +307,12 @@ export const projectList: Project[] = [
 	},
 	{
 		title: "RoboArt",
-		description:
-			"A tiny Python package, powered by Robohash.org, that turns any hash string into a deterministic, reproducible avatar — generate robots, monsters, robot heads, or kittens from the same input every time, handy for auto-generating user avatars.",
+		description: [
+			"Tiny Python package powered by Robohash.org.",
+			"Turns any hash string into a deterministic, reproducible avatar.",
+			"Generate robots, monsters, robot heads, or kittens.",
+			"Handy for auto-generating user avatars.",
+		],
 		technologies: ["Python", "PyPI"],
 		media: [],
 		links: [
