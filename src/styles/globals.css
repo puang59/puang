@@ -137,3 +137,11 @@ body::after {
 .code-block-container pre {
   background-color: black !important; /* Or any color you prefer */
 }
+
+.twitter-embed-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.twitter-embed-scroll {
+  scrollbar-width: none;
+}
