@@ -36,8 +36,8 @@ export default function HomePage() {
 
       <About />
       <Experience />
-      <BlogPreview />
       <ProjectPreview />
+      <BlogPreview />
       <Education />
       <Socials />
     </main>

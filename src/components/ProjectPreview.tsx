@@ -37,7 +37,7 @@ export default function ProjectPreview() {
 								</p>
 							</div>
 							<p className="mt-2 max-w-[95%] text-gray-400 text-sm leading-relaxed">
-								{project.description[0]}
+								{project.description.slice(0, 2).join(" ")}
 							</p>
 						</a>
 					</div>
