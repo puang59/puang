@@ -37,7 +37,13 @@ export const projectList: Project[] = [
 			"Zustand",
 		],
 		languages: ["TypeScript", "Python", "Go", "Astro"],
-		stats: ["700+ users", "10K+ docs generated", "650+ beta testers"],
+		stats: [
+			"700+ users",
+			"10K+ docs generated",
+			"650+ beta testers",
+			"21.1K impressions",
+			"943 engagements",
+		],
 		media: [
 			{ type: "image", src: "/devdoq/cover.png", alt: "devdoq preview" },
 			{ type: "tweet", id: "1937491944982339706" },
@@ -110,7 +116,15 @@ export const projectList: Project[] = [
 		],
 		technologies: ["Go", "Bubble Tea", "WebSocket", "SQLite"],
 		languages: ["Go", "TypeScript"],
-		stats: ["40+ GitHub stars"],
+		stats: [
+			"40+ GitHub stars",
+			"442.2K impressions",
+			"136.7K views",
+			"107K unique visitors",
+			"15.8K engagements",
+			"1.22K likes",
+			"86 reposts",
+		],
 		media: [
 			{ type: "image", src: "/molly/molly.png", alt: "molly preview" },
 			{ type: "tweet", id: "2058457977133346876" },
