@@ -223,6 +223,7 @@ export const projectList: Project[] = [
 		],
 		technologies: ["Next.js", "Convex", "Gemini AI", "Clerk", "Zustand"],
 		languages: ["TypeScript"],
+		stats: ["24.2K impressions", "316 engagements", "68 likes"],
 		media: [
 			{ type: "image", src: "/lexit/cover.png", alt: "lexit preview" },
 			{ type: "tweet", id: "1980993413291081781" },
