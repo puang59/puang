@@ -28,15 +28,15 @@ export default function ProjectPreview() {
 							rel="noopener noreferrer"
 							className="block"
 						>
-							<div className="flex items-baseline justify-between gap-4">
-								<h2 className="truncate font-semibold text-gray-200 text-xl transition-colors duration-300 group-hover:text-green-300">
+							<div className="flex flex-col gap-1 sm:flex-row sm:flex-wrap sm:items-baseline sm:justify-between sm:gap-4">
+								<h2 className="break-words font-semibold text-gray-200 text-xl transition-colors duration-300 group-hover:text-green-300">
 									{project.title}
 								</h2>
-								<p className="whitespace-nowrap font-mono text-gray-500 text-xs">
+								<p className="min-w-0 break-words font-mono text-gray-500 text-xs sm:text-right">
 									{project.technologies.join(", ")}
 								</p>
 							</div>
-							<p className="mt-2 max-w-[95%] text-gray-400 text-sm leading-relaxed">
+							<p className="mt-2 max-w-full break-words text-gray-400 text-sm leading-relaxed sm:max-w-[95%]">
 								{project.description.slice(0, 2).join(" ")}
 							</p>
 						</a>

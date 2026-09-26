@@ -18,15 +18,22 @@ export default function About() {
 				</p>
 
 				<p className="text-gray-300 leading-relaxed tracking-wide">
-					mostly working with code, sometimes hardware
-					<br />i like building things that people genuinely enjoy using and
-					that leave some kind of impact
+					that ends up looking like an http server written from scratch in c, a
+					self-hosted search engine in go, a terminal discord client, and a few
+					ai tools that ship to real users
+					<br />
+					mostly code, sometimes hardware
 				</p>
 
 				<p className="text-gray-300 leading-relaxed tracking-wide">
-					into low-level systems, retro tech, and random tinkering. also into
-					books, media, cameras, and understanding how things work under the
-					hood
+					i like going a layer deeper than i need to — sockets, threads,
+					crawlers, protocols — mostly to find out how the thing actually works
+					instead of trusting the abstraction
+				</p>
+
+				<p className="text-gray-300 leading-relaxed tracking-wide">
+					outside that: retro tech, cameras, books, and random tinkering that
+					occasionally turns into a project
 				</p>
 			</div>
 		</section>
