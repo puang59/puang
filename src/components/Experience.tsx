@@ -1,7 +1,17 @@
 import { RiArrowRightUpLine } from "@remixicon/react";
 import Image from "next/image";
+import type { ReactNode } from "react";
 
-const experience = [
+type Experience = {
+	title: string;
+	position: string;
+	date: string;
+	description: ReactNode;
+	link: string;
+	logo: string;
+};
+
+const experience: Experience[] = [
 	{
 		title: "ploglabs",
 		position: "cofounder",
@@ -34,7 +44,7 @@ const experience = [
 		position: "full stack developer",
 		date: "(may 2025 - july 2025)",
 		description:
-			"built a scalable api architecture with failure fallbacks and ratelimits, ensuring high availability and performance",
+			"built scalable rest apis with go (gin) and fastapi, powering core platform features and ai-generated responses, with failure fallbacks and ratelimits that kept availability and performance high. designed and implemented token-based authentication, user rate-limiting, and middleware security layers, integrated rabbitmq and redis for async tasks, caching, and background job processing, and collaborated on system architecture design while deploying containerized services with docker.",
 		link: "https://thinkdeck.site",
 		logo: "/roles/thinkdeck_01_logo.jpeg",
 	},
@@ -43,7 +53,7 @@ const experience = [
 		position: "chief vfx artist",
 		date: "(sep 2022 - aug 2023)",
 		description:
-			"worked on creating visual effects for air crash investigation documentaries",
+			"worked on creating visual effects for air crash investigation documentaries, designing and producing animations with adobe after effects and advanced vfx tools to support visually compelling storytelling and technical accuracy.",
 		link: "https://www.youtube.com/@GreenDotAviation/",
 		logo: "/roles/green_dot_aviation_limited_logo.jpeg",
 	},
@@ -51,8 +61,21 @@ const experience = [
 		title: "watchout wearables",
 		position: "social media marketing manager",
 		date: "(2019 - 2021)",
-		description:
-			"managed the brand's social media presence and marketing campaigns to grow reach and engagement",
+		description: (
+			<>
+				managed the brand's social media presence and marketing campaigns to
+				grow reach and engagement, contributing to the{" "}
+				<a
+					href="https://youtu.be/SqN1kiRdodk"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="relative z-10 text-gray-300 underline decoration-zinc-700 underline-offset-2 transition-colors duration-300 hover:text-green-300 hover:decoration-green-300/50"
+				>
+					shark tank india pitch
+				</a>{" "}
+				that secured ₹1 crore in funding at a ₹10 crore valuation.
+			</>
+		),
 		link: "https://www.watchoutwearables.com/",
 		logo: "/roles/watchoutwearables.jpeg",
 	},
@@ -66,13 +89,19 @@ export default function Experience() {
 			</h1>
 			<div className="grid grid-cols-1 gap-2">
 				{experience.map((exp) => (
-					<a
+					<div
 						key={exp.title}
-						href={exp.link}
-						target="_blank"
-						rel="noopener noreferrer"
-						className="-mx-6 group relative block cursor-pointer p-6 transition-all duration-300 hover:border-green-300/30 hover:bg-zinc-900/50"
+						className="-mx-6 group relative block p-6 transition-all duration-300 hover:border-green-300/30 hover:bg-zinc-900/50"
 					>
+						<a
+							href={exp.link}
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label={`Open ${exp.title}`}
+							className="absolute inset-0 z-0"
+						>
+							<span className="sr-only">Open {exp.title}</span>
+						</a>
 						<div className="group-hover:-translate-y-0.5 absolute top-5 right-5 text-gray-500 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-green-300">
 							<RiArrowRightUpLine size={20} />
 						</div>
@@ -102,7 +131,7 @@ export default function Experience() {
 								</p>
 							</div>
 						</div>
-					</a>
+					</div>
 				))}
 			</div>
 		</div>
