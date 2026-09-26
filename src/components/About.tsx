@@ -53,7 +53,7 @@ export default function About() {
             className="text-green-300 hover:underline"
           >
             {" "}
-            email
+            hello@puang.in
           </a>
           . you can refer to my{" "}
           <a
