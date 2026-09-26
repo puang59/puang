@@ -22,15 +22,6 @@ const experience: Experience[] = [
 		logo: "/roles/ploglabs.png",
 	},
 	{
-		title: "devdoq",
-		position: "cofounder",
-		date: "(july 2025 - present)",
-		description:
-			"a tool that turns your codebase into living, ai generated docs synced to your repo. never outdated, always clear, and ready to onboard newcomers effortlessly",
-		link: "https://devdoq.com",
-		logo: "/roles/devdoq.jpeg",
-	},
-	{
 		title: "yes bank",
 		position: "artificial intelligence intern",
 		date: "(may 2026 - jun 2026)",
@@ -69,7 +60,7 @@ const experience: Experience[] = [
 					href="https://youtu.be/SqN1kiRdodk"
 					target="_blank"
 					rel="noopener noreferrer"
-					className="relative z-10 text-gray-300 underline decoration-zinc-700 underline-offset-2 transition-colors duration-300 hover:text-green-300 hover:decoration-green-300/50"
+					className="relative z-10 text-green-300 underline decoration-green-300/40 underline-offset-2 transition-colors duration-300 hover:decoration-green-300"
 				>
 					shark tank india pitch
 				</a>{" "}
