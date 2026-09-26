@@ -13,6 +13,7 @@ export type Project = {
 	title: string;
 	description: string[];
 	technologies: string[];
+	languages: string[];
 	stats?: string[];
 	media: MediaItem[];
 	links: ProjectLink[];
@@ -35,6 +36,7 @@ export const projectList: Project[] = [
 			"CocoIndex",
 			"Zustand",
 		],
+		languages: ["TypeScript", "Python", "Go", "Astro"],
 		stats: ["700+ users", "10K+ docs generated", "650+ beta testers"],
 		media: [
 			{ type: "image", src: "/devdoq/cover.png", alt: "devdoq preview" },
@@ -58,6 +60,7 @@ export const projectList: Project[] = [
 			"Vite",
 			"Tailwind CSS",
 		],
+		languages: ["TypeScript", "Rust"],
 		media: [
 			{ type: "image", src: "/nuza/cover.png", alt: "nuza preview" },
 			{ type: "tweet", id: "2103406694214570071" },
@@ -80,6 +83,7 @@ export const projectList: Project[] = [
 			"Supabase-backed history sync.",
 		],
 		technologies: ["Tauri", "React", "TypeScript", "Groq", "Supabase", "Vite"],
+		languages: ["TypeScript", "Rust"],
 		media: [
 			{ type: "image", src: "/tars/cover1.png", alt: "tars preview 1" },
 			{ type: "image", src: "/tars/cover2.png", alt: "tars preview 2" },
@@ -105,6 +109,7 @@ export const projectList: Project[] = [
 			"WebSocket connection backed by a local SQLite cache.",
 		],
 		technologies: ["Go", "Bubble Tea", "WebSocket", "SQLite"],
+		languages: ["Go", "TypeScript"],
 		stats: ["40+ GitHub stars"],
 		media: [
 			{ type: "image", src: "/molly/molly.png", alt: "molly preview" },
@@ -127,6 +132,7 @@ export const projectList: Project[] = [
 			"File and git operations stay fully local.",
 		],
 		technologies: ["TypeScript", "Bun", "OpenAI SDK", "Zod"],
+		languages: ["TypeScript"],
 		media: [
 			{ type: "image", src: "/zeno/cover.jpeg", alt: "zeno preview" },
 			{ type: "tweet", id: "2091476372216824056" },
@@ -148,6 +154,7 @@ export const projectList: Project[] = [
 			"Streams back an instant breakdown.",
 		],
 		technologies: ["Next.js", "Exa", "Gemini", "Vercel AI SDK"],
+		languages: ["TypeScript"],
 		stats: ["12,000+ users", "50K+ impressions / 12hr", "30+ GitHub stars"],
 		media: [
 			{ type: "image", src: "/xtoxic/cover.png", alt: "xtoxic preview" },
@@ -170,6 +177,7 @@ export const projectList: Project[] = [
 			"Tuned for high throughput with a small memory footprint.",
 		],
 		technologies: ["C", "Linux", "Sockets", "POSIX Threads", "Regex"],
+		languages: ["C"],
 		stats: ["9,000+ RPS", "99.99% uptime", "2.8ms latency"],
 		media: [
 			{
@@ -200,6 +208,7 @@ export const projectList: Project[] = [
 			"Upstash-backed rate limiting on the AI endpoints.",
 		],
 		technologies: ["Next.js", "Convex", "Gemini AI", "Clerk", "Zustand"],
+		languages: ["TypeScript"],
 		media: [
 			{ type: "image", src: "/lexit/cover.png", alt: "lexit preview" },
 			{ type: "tweet", id: "1980993413291081781" },
@@ -222,6 +231,7 @@ export const projectList: Project[] = [
 			"Next.js frontend for real-time querying.",
 		],
 		technologies: ["Go", "Gin", "Colly", "Next.js", "TypeScript"],
+		languages: ["Go", "TypeScript"],
 		media: [
 			{ type: "image", src: "/internode/cover.jpeg", alt: "internode preview" },
 			{ type: "tweet", id: "1931346350261641349" },
@@ -243,6 +253,7 @@ export const projectList: Project[] = [
 			"Auto-opens the destination folder when done.",
 		],
 		technologies: ["TypeScript", "Bun", "Commander", "Clack"],
+		languages: ["TypeScript"],
 		stats: ["128+ downloads"],
 		media: [
 			{ type: "image", src: "/wallgrab/cover.png", alt: "wallgrab preview" },
@@ -270,6 +281,7 @@ export const projectList: Project[] = [
 			"Socket.IO streams live stats back to the UI.",
 		],
 		technologies: ["Next.js", "TypeScript", "Socket.IO", "Web Workers"],
+		languages: ["TypeScript"],
 		media: [
 			{ type: "youtube", id: "S5Fwc5TDXHo" },
 			{ type: "tweet", id: "1935698293880951087" },
@@ -292,6 +304,7 @@ export const projectList: Project[] = [
 			"Zip compress/extract utilities in a Click-powered interface.",
 		],
 		technologies: ["Python", "Click", "Cryptography"],
+		languages: ["Python"],
 		media: [
 			{ type: "image", src: "/FileEase/cover.png", alt: "FileEase preview" },
 			{ type: "youtube", id: "AwcSrI3sijQ" },
@@ -314,6 +327,7 @@ export const projectList: Project[] = [
 			"Handy for auto-generating user avatars.",
 		],
 		technologies: ["Python", "PyPI"],
+		languages: ["Python"],
 		media: [],
 		links: [
 			{ label: "PyPI", url: "https://pypi.org/project/RoboArt/", type: "pypi" },

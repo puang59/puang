@@ -9,6 +9,17 @@ import {
 import { MediaCarousel } from "./MediaCarousel";
 import type { Project } from "./Projects";
 
+// GitHub Linguist language colors
+const languageColors: Record<string, string> = {
+	TypeScript: "#3178c6",
+	JavaScript: "#f1e05a",
+	Python: "#3572a5",
+	Go: "#00add8",
+	Rust: "#dea584",
+	Astro: "#ff5a03",
+	C: "#555555",
+};
+
 const linkIcons = {
 	live: RiExternalLinkLine,
 	demo: RiPlayCircleFill,
@@ -83,23 +94,45 @@ export function ProjectCard({ project }: { project: Project }) {
 				</div>
 			)}
 
-			{project.links.length > 0 && (
-				<div className="relative z-10 mt-auto flex items-center gap-5 border-zinc-800/80 border-t pt-4">
-					{project.links.map((link) => {
-						const Icon = linkIcons[link.type];
-						return (
-							<a
-								key={link.url}
-								href={link.url}
-								target="_blank"
-								rel="noopener noreferrer"
-								className="flex items-center gap-1.5 text-gray-500 text-xs transition-colors duration-300 hover:text-green-300 sm:text-sm"
-							>
-								<Icon size={14} />
-								{link.label}
-							</a>
-						);
-					})}
+			{(project.links.length > 0 || project.languages.length > 0) && (
+				<div className="relative z-10 mt-auto flex flex-wrap items-center justify-between gap-x-5 gap-y-2 border-zinc-800/80 border-t pt-4">
+					<div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+						{project.links.map((link) => {
+							const Icon = linkIcons[link.type];
+							return (
+								<a
+									key={link.url}
+									href={link.url}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="flex items-center gap-1.5 text-gray-500 text-xs transition-colors duration-300 hover:text-green-300 sm:text-sm"
+								>
+									<Icon size={14} />
+									{link.label}
+								</a>
+							);
+						})}
+					</div>
+
+					{project.languages.length > 0 && (
+						<div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+							{project.languages.map((language) => (
+								<span
+									key={language}
+									className="flex items-center gap-1.5 text-gray-500 text-xs"
+								>
+									<span
+										aria-hidden="true"
+										className="h-2.5 w-2.5 shrink-0 rounded-full"
+										style={{
+											backgroundColor: languageColors[language] ?? "#8b949e",
+										}}
+									/>
+									{language}
+								</span>
+							))}
+						</div>
+					)}
 				</div>
 			)}
 		</div>
