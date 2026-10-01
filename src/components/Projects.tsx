@@ -1,5 +1,6 @@
 export type MediaItem =
 	| { type: "image"; src: string; alt: string }
+	| { type: "video"; src: string }
 	| { type: "youtube"; id: string }
 	| { type: "tweet"; id: string };
 
@@ -68,6 +69,7 @@ export const projectList: Project[] = [
 		],
 		languages: ["TypeScript", "Rust"],
 		media: [
+			{ type: "video", src: "https://nuza-cdn.puang.in/nuza-intro-v3.mp4" },
 			{ type: "image", src: "/nuza/cover.png", alt: "nuza preview" },
 			{ type: "tweet", id: "2103406694214570071" },
 		],

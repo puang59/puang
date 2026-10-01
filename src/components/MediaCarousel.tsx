@@ -102,6 +102,19 @@ export function MediaCarousel({
 					</button>
 				)}
 
+				{current.type === "video" && (
+					// biome-ignore lint/a11y/useMediaCaption: decorative project demo video
+					<video
+						className="h-full w-full object-cover"
+						src={current.src}
+						autoPlay
+						loop
+						muted
+						playsInline
+						controls
+					/>
+				)}
+
 				{current.type === "youtube" && (
 					<iframe
 						className="h-full w-full"
@@ -153,7 +166,9 @@ export function MediaCarousel({
 						<div className="-translate-x-1/2 absolute bottom-2 left-1/2 z-10 flex gap-1.5">
 							{media.map((item, i) => {
 								const key =
-									item.type === "image" ? item.src : `${item.type}-${item.id}`;
+									item.type === "image" || item.type === "video"
+										? item.src
+										: `${item.type}-${item.id}`;
 								return (
 									<button
 										key={key}
