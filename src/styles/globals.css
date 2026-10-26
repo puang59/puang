@@ -145,3 +145,45 @@ body::after {
 .twitter-embed-scroll {
   scrollbar-width: none;
 }
+
+/* contribution chart: slow breathing glow + sparse firefly flicker */
+.gh-chart {
+  animation: gh-breathe 7s ease-in-out infinite;
+}
+
+.gh-cell-glow {
+  animation: gh-firefly var(--gh-dur, 4s) ease-in-out var(--gh-delay, 0s) infinite;
+}
+
+@keyframes gh-breathe {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 2px rgba(134, 239, 172, 0.08)) brightness(0.92);
+  }
+  50% {
+    filter: drop-shadow(0 0 7px rgba(134, 239, 172, 0.22)) brightness(1.06);
+  }
+}
+
+@keyframes gh-firefly {
+  0%,
+  100% {
+    opacity: 0.55;
+    box-shadow: none;
+  }
+  45% {
+    opacity: 1;
+    box-shadow: 0 0 6px 1px rgba(134, 239, 172, 0.55);
+  }
+  60% {
+    opacity: 0.8;
+    box-shadow: 0 0 3px 0 rgba(134, 239, 172, 0.3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gh-chart,
+  .gh-cell-glow {
+    animation: none;
+  }
+}
