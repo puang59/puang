@@ -30,6 +30,8 @@ const experience: Experience[] = [
 		date: "(june 2025 - present)",
 		points: [
 			"a lab where we turn ai into practical tools that solve real problems for real people — fast, useful, and built for everyone.",
+			"built devdoq under ploglabs, an ai codebase documentation platform that grew to 700+ users and 650+ beta testers, generating 10k+ docs.",
+			"built molly under ploglabs, a terminal-native discord client that reached 40+ github stars and 442k+ impressions across 107k unique visitors.",
 		],
 		link: "https://ploglabs.com",
 		logo: "/roles/ploglabs.png",
