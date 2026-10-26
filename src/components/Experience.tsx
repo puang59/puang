@@ -11,15 +11,34 @@ type Experience = {
 	logo: string;
 };
 
+const H = ({ children }: { children: ReactNode }) => (
+	<span className="font-medium text-gray-200">{children}</span>
+);
+
 const experience: Experience[] = [
 	{
 		title: "turflang",
 		position: "core maintainer",
 		date: "(jan 2026 - present)",
 		points: [
-			"core maintainer of turf, a statically typed, aot-compiled systems language targeting native executables via llvm — structs, enums, generics, pattern matching, error unions, and a gc'd heap with checked references.",
-			"help ship the turf cli (build/run/test/fmt/check), an lsp server, and a standard library covering strings, collections, files, json, http, and sockets; each release bundles its own llvm, linker, and runtime.",
-			"maintain ci testing every change across 4 tier-1 platforms (linux x86-64/arm64, windows x86-64, macos arm64), gating releases; grown to 1,200+ commits, 78k loc, and v2.1.1 with a 3-person core team over 10 months.",
+			<Fragment key="p1">
+				core maintainer of <H>turf</H>, a statically typed,{" "}
+				<H>aot-compiled systems language</H> targeting native executables via{" "}
+				<H>llvm</H> — structs, enums, generics, pattern matching, error unions,
+				and a gc'd heap with checked references.
+			</Fragment>,
+			<Fragment key="p2">
+				help ship the <H>turf cli</H> (build/run/test/fmt/check), an{" "}
+				<H>lsp server</H>, and a <H>standard library</H> covering strings,
+				collections, files, json, http, and sockets; each release bundles its
+				own llvm, linker, and runtime.
+			</Fragment>,
+			<Fragment key="p3">
+				maintain <H>ci across 4 tier-1 platforms</H> (linux x86-64/arm64,
+				windows x86-64, macos arm64), gating releases; grown to{" "}
+				<H>1,200+ commits</H>, <H>78k loc</H>, and <H>v2.1.1</H> with a 3-person
+				core team over 10 months.
+			</Fragment>,
 		],
 		link: "https://turflang.org",
 		logo: "/roles/turflang.png",
@@ -29,9 +48,20 @@ const experience: Experience[] = [
 		position: "cofounder",
 		date: "(june 2025 - present)",
 		points: [
-			"a lab where we turn ai into practical tools that solve real problems for real people — fast, useful, and built for everyone.",
-			"built devdoq under ploglabs, an ai codebase documentation platform that grew to 700+ users and 650+ beta testers, generating 10k+ docs.",
-			"built molly under ploglabs, a terminal-native discord client that reached 40+ github stars and 442k+ impressions across 107k unique visitors.",
+			<Fragment key="p4">
+				a lab where we turn <H>ai into practical tools</H> that solve real
+				problems for real people — fast, useful, and built for everyone.
+			</Fragment>,
+			<Fragment key="p5">
+				built <H>devdoq</H> under ploglabs, an ai codebase documentation
+				platform that grew to <H>700+ users</H> and <H>650+ beta testers</H>,
+				generating <H>10k+ docs</H>.
+			</Fragment>,
+			<Fragment key="p6">
+				built <H>molly</H> under ploglabs, a terminal-native discord client that
+				reached <H>40+ github stars</H> and <H>442k+ impressions</H> across 107k
+				unique visitors.
+			</Fragment>,
 		],
 		link: "https://ploglabs.com",
 		logo: "/roles/ploglabs.png",
@@ -41,8 +71,17 @@ const experience: Experience[] = [
 		position: "artificial intelligence intern",
 		date: "(may 2026 - jun 2026)",
 		points: [
-			"developed enterprise ai and internal productivity solutions using azure openai, next.js, and typescript, delivering real-time conversational interfaces and intelligent workflow automation for internal business operations.",
-			"re-architected a python streamlit prototype into a production-oriented next.js application with secure authentication, transactional bulk provisioning workflows, and a scalable, modular architecture for internal banking operations.",
+			<Fragment key="p7">
+				developed <H>enterprise ai</H> and internal productivity solutions using{" "}
+				<H>azure openai</H>, next.js, and typescript, delivering real-time
+				conversational interfaces and intelligent workflow automation.
+			</Fragment>,
+			<Fragment key="p8">
+				re-architected a <H>python streamlit prototype</H> into a
+				production-oriented <H>next.js application</H> with secure
+				authentication, transactional bulk provisioning workflows, and a
+				scalable, modular architecture for internal banking operations.
+			</Fragment>,
 		],
 		link: "https://www.yesbank.in",
 		logo: "/roles/yes_bank_logo.jpeg",
@@ -52,9 +91,20 @@ const experience: Experience[] = [
 		position: "full stack developer",
 		date: "(may 2025 - july 2025)",
 		points: [
-			"built scalable rest apis with go (gin) and fastapi, powering core platform features and ai-generated responses, with failure fallbacks and rate limits that kept availability and performance high.",
-			"designed and implemented token-based authentication, user rate-limiting, and middleware security layers.",
-			"integrated rabbitmq and redis for async tasks, caching, and background job processing, and collaborated on system architecture while deploying containerized services with docker.",
+			<Fragment key="p9">
+				built scalable <H>rest apis</H> with <H>go (gin)</H> and <H>fastapi</H>,
+				powering core platform features and ai-generated responses, with failure
+				fallbacks and rate limits that kept availability high.
+			</Fragment>,
+			<Fragment key="p10">
+				designed and implemented <H>token-based authentication</H>, user
+				rate-limiting, and middleware security layers.
+			</Fragment>,
+			<Fragment key="p11">
+				integrated <H>rabbitmq</H> and <H>redis</H> for async tasks, caching,
+				and background jobs, and collaborated on system architecture while
+				deploying containerized services with <H>docker</H>.
+			</Fragment>,
 		],
 		link: "https://thinkdeck.site",
 		logo: "/roles/thinkdeck_01_logo.jpeg",
@@ -64,8 +114,15 @@ const experience: Experience[] = [
 		position: "chief vfx artist",
 		date: "(sep 2022 - aug 2023)",
 		points: [
-			"created visual effects for air crash investigation documentaries, supporting visually compelling storytelling and technical accuracy.",
-			"designed and produced animations with adobe after effects and advanced vfx tools.",
+			<Fragment key="p12">
+				created <H>visual effects</H> for{" "}
+				<H>air crash investigation documentaries</H>, supporting compelling
+				storytelling and technical accuracy.
+			</Fragment>,
+			<Fragment key="p13">
+				designed and produced animations with <H>adobe after effects</H> and
+				advanced vfx tools.
+			</Fragment>,
 		],
 		link: "https://www.youtube.com/@GreenDotAviation/",
 		logo: "/roles/green_dot_aviation_limited_logo.jpeg",
@@ -75,8 +132,11 @@ const experience: Experience[] = [
 		position: "social media marketing manager",
 		date: "(2019 - 2021)",
 		points: [
-			"managed the brand's social media presence and marketing campaigns to grow reach and engagement.",
-			<Fragment key="shark-tank">
+			<Fragment key="p14">
+				managed the brand's <H>social media presence</H> and marketing campaigns
+				to grow reach and engagement.
+			</Fragment>,
+			<Fragment key="p15">
 				contributed to the{" "}
 				<a
 					href="https://youtu.be/SqN1kiRdodk"
@@ -86,7 +146,7 @@ const experience: Experience[] = [
 				>
 					shark tank india pitch
 				</a>{" "}
-				that secured ₹1 crore in funding at a ₹10 crore valuation.
+				that secured <H>₹1 crore</H> in funding at a <H>₹10 crore valuation</H>.
 			</Fragment>,
 		],
 		link: "https://www.watchoutwearables.com/",
