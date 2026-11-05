@@ -81,7 +81,7 @@ export default async function GithubChart() {
 											? undefined
 											: `${day.count} contributions on ${day.date}`
 									}
-									className={`aspect-square rounded-[2px] transition-transform duration-300 ease-soft hover:scale-[1.35] ${pad ? "" : levelColors[day.level]} ${glow ? "gh-cell-glow" : ""}`}
+									className={`aspect-square transition-transform sm:rounded-[2px] duration-300 ease-soft hover:scale-[1.35] ${pad ? "" : levelColors[day.level]} ${glow ? "gh-cell-glow" : ""}`}
 									style={
 										glow
 											? ({

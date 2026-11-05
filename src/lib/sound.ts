@@ -16,9 +16,15 @@ const listeners = new Set<() => void>();
 function load() {
 	if (loaded || typeof window === "undefined") return;
 	loaded = true;
+	let stored: string | null = null;
 	try {
-		muted = localStorage.getItem(STORAGE_KEY) === "1";
+		stored = localStorage.getItem(STORAGE_KEY);
 	} catch {}
+	// Without a saved choice, start muted on touch devices (phones, tablets).
+	muted =
+		stored === null
+			? window.matchMedia("(hover: none) and (pointer: coarse)").matches
+			: stored === "1";
 }
 
 function audio() {
