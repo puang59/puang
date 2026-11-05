@@ -1,80 +1,86 @@
 "use client";
 import Link, { type LinkProps } from "next/link";
-import { useRouter, usePathname } from "next/navigation";
-import React, { type ReactNode, useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import type React from "react";
+import { type ReactNode, useEffect, useState } from "react";
 
 interface TransitionLinkProps extends LinkProps {
-  children: ReactNode;
-  href: string;
-  className: string;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
+	children: ReactNode;
+	href: string;
+	className: string;
+	onMouseEnter?: () => void;
+	onMouseLeave?: () => void;
 }
 
 function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+	return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 const visitedRoutes = new Set<string>();
 
 export default function TransitionLink({
-  children,
-  href,
-  className,
-  onMouseEnter,
-  onMouseLeave,
-  ...props
+	children,
+	href,
+	className,
+	onMouseEnter,
+	onMouseLeave,
+	...props
 }: TransitionLinkProps) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const [isClient, setIsClient] = useState(false);
+	const router = useRouter();
+	const pathname = usePathname();
+	const [isClient, setIsClient] = useState(false);
 
-  useEffect(() => {
-    setIsClient(true);
-    if (pathname) {
-      visitedRoutes.add(pathname);
-    }
-  }, [pathname]);
+	useEffect(() => {
+		setIsClient(true);
+		if (pathname) {
+			visitedRoutes.add(pathname);
+		}
+	}, [pathname]);
 
-  const targetPath = href.split("?")[0] || "";
-  const currentPath = pathname || "";
+	const targetPath = href.split("?")[0] || "";
+	const currentPath = pathname || "";
 
-  const handleTranstion = async (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
-    e.preventDefault();
+	const handleTranstion = async (
+		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+	) => {
+		// Let the browser handle new-tab / new-window clicks normally.
+		if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) {
+			return;
+		}
 
-    if (currentPath === targetPath) {
-      return;
-    }
+		e.preventDefault();
 
-    // starting animation here
-    window.dispatchEvent(new CustomEvent("pageTransitionStart"));
+		if (currentPath === targetPath) {
+			return;
+		}
 
-    await sleep(300);
+		// starting animation here
+		window.dispatchEvent(new CustomEvent("pageTransitionStart"));
 
-    router.push(href);
+		await sleep(160);
 
-    if (targetPath) {
-      visitedRoutes.add(targetPath);
-    }
+		router.push(href);
 
-    await sleep(100);
+		if (targetPath) {
+			visitedRoutes.add(targetPath);
+		}
 
-    window.dispatchEvent(new CustomEvent("pageTransitionComplete"));
-  };
+		await sleep(60);
 
-  return (
-    <Link
-      onClick={isClient ? handleTranstion : undefined}
-      href={href}
-      className={className}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      {...props}
-      prefetch={true}
-    >
-      {children}
-    </Link>
-  );
+		window.dispatchEvent(new CustomEvent("pageTransitionComplete"));
+	};
+
+	return (
+		<Link
+			onClick={isClient ? handleTranstion : undefined}
+			href={href}
+			className={className}
+			onMouseEnter={onMouseEnter}
+			onMouseLeave={onMouseLeave}
+			{...props}
+			prefetch={true}
+		>
+			{children}
+		</Link>
+	);
 }

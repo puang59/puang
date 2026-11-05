@@ -1,13 +1,16 @@
+import ChartSounds from "./ChartSounds";
+import { Section } from "./frame";
+
 type Day = { date: string; count: number; level: 0 | 1 | 2 | 3 | 4 };
 
 const USERNAME = "puang59";
 
 const levelColors = [
-	"bg-zinc-900",
-	"bg-green-900",
-	"bg-green-700",
-	"bg-green-500",
-	"bg-green-300",
+	"bg-raised",
+	"bg-[#2f2f2d]",
+	"bg-[#575754]",
+	"bg-[#94948f]",
+	"bg-foreground",
 ];
 
 const hash = (str: string) => {
@@ -47,47 +50,55 @@ export default async function GithubChart() {
 	const weeks = { length: Math.ceil(cells.length / 7) };
 
 	return (
-		<div className="mb-16 text-white">
+		<Section index="01" title="Activity">
 			<a
 				href={`https://github.com/${USERNAME}`}
 				target="_blank"
 				rel="noopener noreferrer"
+				aria-label="GitHub contribution chart for the last year"
 				className="block"
 			>
-				<div
-					className="gh-chart grid gap-[3px]"
-					style={{
-						gridTemplateColumns: `repeat(${weeks.length}, minmax(0, 1fr))`,
-						gridTemplateRows: "repeat(7, auto)",
-						gridAutoFlow: "column",
-					}}
-				>
-					{cells.map((day) => {
-						const pad = day.count < 0;
-						const glow = !pad && day.level >= 2 && hash(day.date) % 4 === 0;
-						return (
-							<div
-								key={day.date}
-								title={
-									pad ? undefined : `${day.count} contributions on ${day.date}`
-								}
-								className={`aspect-square ${pad ? "" : levelColors[day.level]} ${glow ? "gh-cell-glow" : ""}`}
-								style={
-									glow
-										? ({
-												"--gh-dur": `${3 + (hash(`${day.date}d`) % 40) / 10}s`,
-												"--gh-delay": `-${(hash(`${day.date}s`) % 60) / 10}s`,
-											} as React.CSSProperties)
-										: undefined
-								}
-							/>
-						);
-					})}
-				</div>
+				<ChartSounds>
+					<div
+						className="grid gap-[3px]"
+						style={{
+							gridTemplateColumns: `repeat(${weeks.length}, minmax(0, 1fr))`,
+							gridTemplateRows: "repeat(7, auto)",
+							gridAutoFlow: "column",
+						}}
+					>
+						{cells.map((day, i) => {
+							const pad = day.count < 0;
+							const glow = !pad && day.level >= 1 && hash(day.date) % 5 === 0;
+							return (
+								<div
+									key={day.date}
+									data-row={pad ? undefined : i % 7}
+									data-week={pad ? undefined : Math.floor(i / 7)}
+									data-level={pad ? undefined : day.level}
+									title={
+										pad
+											? undefined
+											: `${day.count} contributions on ${day.date}`
+									}
+									className={`aspect-square rounded-[2px] transition-transform duration-300 ease-soft hover:scale-[1.35] ${pad ? "" : levelColors[day.level]} ${glow ? "gh-cell-glow" : ""}`}
+									style={
+										glow
+											? ({
+													"--gh-dur": `${5 + (hash(`${day.date}d`) % 60) / 10}s`,
+													"--gh-delay": `-${(hash(`${day.date}s`) % 110) / 10}s`,
+												} as React.CSSProperties)
+											: undefined
+									}
+								/>
+							);
+						})}
+					</div>
+				</ChartSounds>
 			</a>
-			<p className="mt-3 font-mono text-gray-500 text-xs">
+			<p className="mt-3 font-mono text-[11px] text-faint">
 				{data.total.toLocaleString()} contributions in the last year
 			</p>
-		</div>
+		</Section>
 	);
 }

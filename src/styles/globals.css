@@ -3,10 +3,30 @@
 @tailwind utilities;
 
 :root {
-  background-color: black;
-  color: white;
+  background-color: #0a0a0a;
+  color: #ededea;
   scroll-behavior: smooth;
 }
+
+body {
+  background-color: #0a0a0a;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #ededea;
+  color: #0a0a0a;
+}
+
+/* hatched side rails of the content column */
+.hatch-rail {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent 0 9px,
+    rgba(237, 237, 234, 0.09) 9px 10px
+  );
+}
+
 
 ::-webkit-scrollbar {
   display: none;
@@ -17,70 +37,10 @@ html {
   scrollbar-width: none;
 }
 
-body::after {
-  content: "";
-  background-image: url("https://bedes.qui.gg/images/framernoise.png");
-  height: 300%;
-  width: 300%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 100;
-  animation: fadeInGrain 2s ease forwards, animateGrain 8s steps(10) infinite;
-}
-
-@keyframes fadeInGrain {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.08;
-  }
-}
-
-@keyframes animateGrain {
-  0%,
-  100% {
-    transform: translate(0, 0);
-  }
-  10% {
-    transform: translate(-5%, -10%);
-  }
-  20% {
-    transform: translate(-15%, -20%);
-  }
-  30% {
-    transform: translate(-5%, -10%);
-  }
-  40% {
-    transform: translate(-15%, -20%);
-  }
-  50% {
-    transform: translate(-5%, -10%);
-  }
-  60% {
-    transform: translate(-15%, -20%);
-  }
-  70% {
-    transform: translate(-5%, -10%);
-  }
-  80% {
-    transform: translate(-15%, -20%);
-  }
-  90% {
-    transform: translate(-5%, -10%);
-  }
-  100% {
-    transform: translate(-15%, -20%);
-  }
-}
-
 .transition-wrapper {
   transition-property: opacity, transform, filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
+  transition-duration: 180ms;
   will-change: opacity, filter;
 }
 
@@ -91,23 +51,6 @@ body::after {
   pointer-events: none;
 }
 
-.content-fade-mask {
-  padding-bottom: 90px;
-}
-
-.initial-load {
-  opacity: 0;
-  animation: fadeInPage 10s ease-out forwards 3s;
-}
-
-@keyframes fadeInPage {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
 
 /* Show scrollbar only for code blocks */
 .code-block-container::-webkit-scrollbar {
@@ -135,55 +78,128 @@ body::after {
 }
 
 .code-block-container pre {
-  background-color: black !important; /* Or any color you prefer */
+  background-color: transparent !important;
 }
 
-.twitter-embed-scroll::-webkit-scrollbar {
-  display: none;
-}
-
-.twitter-embed-scroll {
-  scrollbar-width: none;
-}
-
-/* contribution chart: slow breathing glow + sparse firefly flicker */
-.gh-chart {
-  animation: gh-breathe 7s ease-in-out infinite;
-}
-
+/* contribution chart: individual cells fade into a soft glow at random times */
 .gh-cell-glow {
-  animation: gh-firefly var(--gh-dur, 4s) ease-in-out var(--gh-delay, 0s) infinite;
-}
-
-@keyframes gh-breathe {
-  0%,
-  100% {
-    filter: drop-shadow(0 0 2px rgba(134, 239, 172, 0.08)) brightness(0.92);
-  }
-  50% {
-    filter: drop-shadow(0 0 7px rgba(134, 239, 172, 0.22)) brightness(1.06);
-  }
+  animation: gh-firefly var(--gh-dur, 6s) ease-in-out var(--gh-delay, 0s) infinite;
 }
 
 @keyframes gh-firefly {
   0%,
+  30%,
+  70%,
   100% {
-    opacity: 0.55;
-    box-shadow: none;
+    filter: brightness(1);
+    box-shadow: 0 0 0 0 rgba(237, 237, 234, 0);
   }
-  45% {
-    opacity: 1;
-    box-shadow: 0 0 6px 1px rgba(134, 239, 172, 0.55);
+  50% {
+    filter: brightness(1.9);
+    box-shadow: 0 0 8px 1px rgba(237, 237, 234, 0.35);
   }
-  60% {
-    opacity: 0.8;
-    box-shadow: 0 0 3px 0 rgba(134, 239, 172, 0.3);
+}
+
+/* squiggly divider; the wave drifts sideways very slowly */
+.squiggle {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='12' viewBox='0 0 24 12'%3E%3Cpath d='M0 6 Q6 0 12 6 T24 6' fill='none' stroke='%233a3a37' stroke-width='1.2'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: 0 center;
+  animation: squiggleDrift 6s linear infinite;
+}
+
+@keyframes squiggleDrift {
+  to {
+    background-position: 24px center;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .gh-chart,
-  .gh-cell-glow {
+  .gh-cell-glow,
+  .squiggle {
+    animation: none;
+  }
+}
+
+/* Buttons: soft vertical gradient with a lighter hairline along the top edge
+   for depth, and a 1px border. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  transition: background 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 150ms ease-out;
+}
+
+.btn:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+.btn-primary {
+  color: #0a0a0a;
+  background: linear-gradient(180deg, #f5f5f2 0%, #d4d4cf 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px #8e8e89;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(180deg, #ffffff 0%, #dededa 100%);
+  box-shadow: inset 0 1px 0 #ffffff, inset 0 -1px 0 rgba(0, 0, 0, 0.1),
+    0 0 0 1px #a3a39e;
+}
+
+.btn-primary:active {
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), 0 0 0 1px #8e8e89;
+}
+
+.btn-secondary {
+  color: #b5b5b0;
+  background: linear-gradient(180deg, #232322 0%, #171716 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.09),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4), 0 0 0 1px #2f2f2d;
+}
+
+.btn-secondary:hover {
+  color: #ededea;
+  background: linear-gradient(180deg, #2a2a29 0%, #1b1b1a 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.13),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4), 0 0 0 1px #3a3a38;
+}
+
+.btn-secondary:active {
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5), 0 0 0 1px #2f2f2d;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  border-radius: 0.4rem;
+}
+
+/* Entrance for above-the-fold content: pure CSS, so it plays on first paint
+   instead of waiting for JavaScript to hydrate. */
+.rise {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise {
     animation: none;
   }
 }

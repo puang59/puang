@@ -1,32 +1,70 @@
+import type { Metadata } from "next";
+import Footer from "~/components/Footer";
+import PageHeader from "~/components/PageHeader";
 import { ProjectCards } from "~/components/ProjectCards";
+import { projectList } from "~/components/Projects";
+import Rise from "~/components/Rise";
+import { Frame, Section } from "~/components/frame";
+import { ogImage } from "~/lib/site";
 
 export default function Projects() {
-  return (
-    <main className="mx-auto mt-5 flex min-h-screen max-w-[1800px] flex-col p-8 text-white md:mt-0 md:p-16 lg:px-12 lg:py-24 xl:px-16">
-      <div className="flex-1">
-        <h2 className="mb-2 font-bold text-3xl">
-          <span className="text-green-300">&gt;</span> projects
-        </h2>
-        <p className="max-w-2xl text-gray-400 text-sm leading-relaxed">
-          most of these come with demo videos and X posts, so you can see how
-          they actually work and the impact they had. where there's a live site,
-          source code, or a write-up, the links are right there on the card if
-          you want to dig deeper.
-        </p>
-        <ProjectCards />
-      </div>
-    </main>
-  );
+	return (
+		<Frame>
+			<PageHeader
+				back="/"
+				backLabel="home"
+				trail={`${projectList.length} projects`}
+			/>
+			<Section className="px-5 pt-10 pb-6 sm:px-8">
+				<Rise delay={0.06}>
+					<h1 className="font-semibold text-[28px] text-foreground tracking-tight">
+						Projects
+					</h1>
+					<p className="mt-3 text-[15px] text-muted leading-relaxed">
+						Things I've built and shipped. Open one for demos, write-ups and the
+						stack behind it.
+					</p>
+				</Rise>
+			</Section>
+			<Section divider="line">
+				<ProjectCards projects={projectList} />
+			</Section>
+			<Footer />
+		</Frame>
+	);
 }
 
-export const metadata = {
-  title: "Projects",
-  description: "These are some projects I've worked on.",
-  openGraph: {
-    images: [
-      {
-        url: "https://www.puang.in/og/home?title=projects",
-      },
-    ],
-  },
+const description =
+	"Projects by Karan Kumar: devdoq, nuza, molly and more. Web apps, desktop apps, CLI tools and AI agents, with demos and the stack behind each one.";
+
+export const metadata: Metadata = {
+	title: "Projects",
+	description,
+	alternates: { canonical: "/projects" },
+	openGraph: {
+		title: "Projects · Karan Kumar",
+		description,
+		url: "/projects",
+		images: [
+			{
+				url: ogImage({
+					title: "Projects",
+					subtitle: "Things I've built and shipped.",
+				}),
+				width: 1200,
+				height: 630,
+			},
+		],
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Projects · Karan Kumar",
+		description,
+		images: [
+			ogImage({
+				title: "Projects",
+				subtitle: "Things I've built and shipped.",
+			}),
+		],
+	},
 };

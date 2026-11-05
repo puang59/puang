@@ -1,18 +1,24 @@
-import { RiArrowRightUpLine } from "@remixicon/react";
+"use client";
+import { RiArrowDownSLine, RiArrowRightUpLine } from "@remixicon/react";
+import { AnimatePresence, m } from "framer-motion";
 import Image from "next/image";
-import { Fragment, type ReactNode } from "react";
+import { Fragment, type ReactNode, useState } from "react";
+import Reveal from "./Reveal";
+import { Section } from "./frame";
 
 type Experience = {
 	title: string;
 	position: string;
 	date: string;
+	duration?: string;
+	location?: string;
 	points: ReactNode[];
 	link: string;
 	logo: string;
 };
 
 const H = ({ children }: { children: ReactNode }) => (
-	<span className="font-medium text-gray-200">{children}</span>
+	<span className="font-medium text-foreground">{children}</span>
 );
 
 const experience: Experience[] = [
@@ -70,6 +76,8 @@ const experience: Experience[] = [
 		title: "yes bank",
 		position: "artificial intelligence intern",
 		date: "(may 2026 - jun 2026)",
+		duration: "2 mos",
+		location: "mumbai · on-site",
 		points: [
 			<Fragment key="p7">
 				developed <H>enterprise ai</H> and internal productivity solutions using{" "}
@@ -89,7 +97,9 @@ const experience: Experience[] = [
 	{
 		title: "thinkdeck",
 		position: "full stack developer",
-		date: "(may 2025 - july 2025)",
+		date: "(may 2025 - jul 2025)",
+		duration: "3 mos",
+		location: "remote",
 		points: [
 			<Fragment key="p9">
 				built scalable <H>rest apis</H> with <H>go (gin)</H> and <H>fastapi</H>,
@@ -112,7 +122,9 @@ const experience: Experience[] = [
 	{
 		title: "greendot aviation",
 		position: "chief vfx artist",
-		date: "(sep 2022 - aug 2023)",
+		date: "(nov 2022 - nov 2023)",
+		duration: "1 yr 1 mo",
+		location: "remote",
 		points: [
 			<Fragment key="p12">
 				created <H>visual effects</H> for{" "}
@@ -131,6 +143,7 @@ const experience: Experience[] = [
 		title: "watchout wearables",
 		position: "social media marketing manager",
 		date: "(2019 - 2021)",
+		location: "remote",
 		points: [
 			<Fragment key="p14">
 				managed the brand's <H>social media presence</H> and marketing campaigns
@@ -142,7 +155,7 @@ const experience: Experience[] = [
 					href="https://youtu.be/SqN1kiRdodk"
 					target="_blank"
 					rel="noopener noreferrer"
-					className="relative z-10 text-green-300 underline decoration-green-300/40 underline-offset-2 transition-colors duration-300 hover:decoration-green-300"
+					className="text-foreground underline decoration-faint underline-offset-2 transition-colors duration-300 hover:decoration-foreground"
 				>
 					shark tank india pitch
 				</a>{" "}
@@ -154,64 +167,109 @@ const experience: Experience[] = [
 	},
 ];
 
+// "jan 2026 - present" -> "2026 — now", "may 2025 - july 2025" -> "2025"
+const years = (date: string) => {
+	const [from = "", to = ""] = date.split(" - ").map((part) => {
+		if (part.trim() === "present") return "now";
+		return part.trim().split(" ").pop() ?? "";
+	});
+	return from === to ? from : `${from} — ${to}`;
+};
+
 export default function Experience() {
+	const [open, setOpen] = useState<string | null>(null);
+
 	return (
-		<div className="mb-16 text-white">
-			<h1 className="mb-8 font-bold text-2xl text-white">
-				<span className="text-green-300">&gt;</span> work
-			</h1>
-			<div className="grid grid-cols-1 gap-2">
-				{experience.map((exp) => (
-					<div
-						key={exp.title}
-						className="-mx-6 group relative block p-6 transition-all duration-300 hover:border-green-300/30 hover:bg-zinc-900/50"
-					>
-						<a
-							href={exp.link}
-							target="_blank"
-							rel="noopener noreferrer"
-							aria-label={`Open ${exp.title}`}
-							className="absolute inset-0 z-0"
-						>
-							<span className="sr-only">Open {exp.title}</span>
-						</a>
-						<div className="group-hover:-translate-y-0.5 absolute top-5 right-5 text-gray-500 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-green-300">
-							<RiArrowRightUpLine size={20} />
-						</div>
-
-						<div className="flex gap-4">
-							<Image
-								src={exp.logo}
-								alt={`${exp.title} logo`}
-								width={44}
-								height={44}
-								className="h-11 w-11 shrink-0 border border-zinc-800 bg-zinc-950 object-contain"
-							/>
-
-							<div className="flex-1">
-								<div className="flex flex-col gap-1 pr-6">
-									<h2 className="font-bold text-white text-xl transition-colors duration-300 group-hover:text-green-300">
-										{exp.title}
-									</h2>
-									<p className="font-mono text-gray-500 text-xs">
-										{exp.position} <span className="mx-1 text-zinc-700">|</span>{" "}
-										{exp.date}
+		<Section index="02" title="Work">
+			<div className="-mx-3 space-y-0.5">
+				{experience.map((exp, i) => {
+					const isOpen = open === exp.title;
+					const date = exp.date.replace(/[()]/g, "");
+					return (
+						<Reveal key={exp.title} delay={i * 0.05}>
+							<div
+								className={`group rounded-lg transition-colors duration-300 ease-soft ${
+									isOpen ? "bg-surface" : "hover:bg-surface/60"
+								}`}
+							>
+								<button
+									type="button"
+									aria-expanded={isOpen}
+									onClick={() => setOpen(isOpen ? null : exp.title)}
+									className="flex w-full items-center gap-3 px-3 py-2.5 text-left"
+								>
+									<span className="hidden w-24 shrink-0 font-mono text-[11px] text-faint tabular-nums sm:block">
+										{years(date)}
+									</span>
+									<Image
+										src={exp.logo}
+										alt={`${exp.title} logo`}
+										width={28}
+										height={28}
+										className={`h-7 w-7 shrink-0 rounded-[5px] bg-raised object-contain ring-1 ring-line transition-[filter] duration-500 ease-soft group-hover:grayscale-0 ${
+											isOpen ? "grayscale-0" : "grayscale"
+										}`}
+									/>
+									<p className="min-w-0 flex-1 truncate text-sm">
+										<span className="font-medium text-foreground">
+											{exp.title}
+										</span>
+										<span className="text-faint"> · {exp.position}</span>
 									</p>
-								</div>
+									<RiArrowDownSLine
+										size={16}
+										className={`shrink-0 text-faint transition-transform duration-500 ease-soft ${
+											isOpen ? "rotate-180 text-muted" : ""
+										}`}
+									/>
+								</button>
 
-								<ul className="mt-4 max-w-[95%] space-y-1.5 text-gray-400 text-sm leading-relaxed">
-									{exp.points.map((point, i) => (
-										<li key={`${exp.title}-${i}`} className="flex gap-2">
-											<span className="text-green-300/60">•</span>
-											<span>{point}</span>
-										</li>
-									))}
-								</ul>
+								<AnimatePresence initial={false}>
+									{isOpen && (
+										<m.div
+											initial={{ height: 0, opacity: 0 }}
+											animate={{ height: "auto", opacity: 1 }}
+											exit={{ height: 0, opacity: 0 }}
+											transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+											className="overflow-hidden"
+										>
+											<div className="pr-3 pb-4 pl-[52px] sm:pl-[160px]">
+												<p className="mb-3 font-mono text-[11px] text-faint">
+													{[date, exp.duration, exp.location]
+														.filter(Boolean)
+														.join("  ·  ")}
+												</p>
+												<ul className="space-y-2 text-muted text-sm leading-relaxed">
+													{exp.points.map((point, j) => (
+														<li
+															key={`${exp.title}-${j}`}
+															className="flex gap-2.5"
+														>
+															<span className="mt-[0.6em] h-1 w-1 shrink-0 rounded-full bg-faint" />
+															<span>{point}</span>
+														</li>
+													))}
+												</ul>
+												<a
+													href={exp.link}
+													target="_blank"
+													rel="noopener noreferrer"
+													className="mt-4 inline-flex items-center gap-1 text-faint text-xs transition-colors duration-300 hover:text-foreground"
+												>
+													{exp.link
+														.replace(/^https?:\/\/(www\.)?/, "")
+														.replace(/\/$/, "")}
+													<RiArrowRightUpLine size={13} />
+												</a>
+											</div>
+										</m.div>
+									)}
+								</AnimatePresence>
 							</div>
-						</div>
-					</div>
-				))}
+						</Reveal>
+					);
+				})}
 			</div>
-		</div>
+		</Section>
 	);
 }

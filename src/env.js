@@ -8,6 +8,10 @@ export const env = createEnv({
    */
   server: {
     NODE_ENV: z.enum(["development", "test", "production"]),
+    // CounterAPI (v2) powers the visitor count; see src/app/api/visits/route.ts
+    COUNTER_API_KEY: z.string().optional(),
+    COUNTER_WORKSPACE: z.string().optional(),
+    COUNTER_NAME: z.string().optional(),
   },
 
   /**
@@ -25,6 +29,9 @@ export const env = createEnv({
    */
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
+    COUNTER_API_KEY: process.env.COUNTER_API_KEY,
+    COUNTER_WORKSPACE: process.env.COUNTER_WORKSPACE,
+    COUNTER_NAME: process.env.COUNTER_NAME,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**

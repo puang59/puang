@@ -1,112 +1,133 @@
 import { notFound } from "next/navigation";
-import { MDX } from "./mdx";
+import Footer from "~/components/Footer";
+import PageHeader from "~/components/PageHeader";
+import { OriginBackLink } from "~/components/ProjectNav";
+import Reveal from "~/components/Reveal";
+import Rise from "~/components/Rise";
+import { Frame, Section } from "~/components/frame";
 import { getPostBySlug, getPosts } from "~/components/utils/blog";
-import BackButton from "~/components/BackButton";
+import { site } from "~/lib/site";
+import { MDX } from "./mdx";
 
 export async function generateStaticParams() {
-  const posts = getPosts();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+	const posts = getPosts();
+	return posts.map((post) => ({
+		slug: post.slug,
+	}));
 }
 
 type SlugParams = { slug: string };
 
 export async function generateMetadata({
-  params,
+	params,
 }: {
-  params: Promise<SlugParams>;
+	params: Promise<SlugParams>;
 }) {
-  const { slug } = await params;
-  const post = getPostBySlug(slug);
-  if (!post) {
-    return;
-  }
+	const { slug } = await params;
+	const post = getPostBySlug(slug);
+	if (!post) {
+		return;
+	}
 
-  const publishedTime = formatDate(post.metadata.date);
+	const publishedTime = formatDate(post.metadata.date);
 
-  return {
-    title: post.metadata.title,
-    description: post.metadata.description,
-    openGraph: {
-      title: post.metadata.title,
-      description: post.metadata.description,
-      publishedTime,
-      type: "article",
-      url: `https://www.puang.in/blog/${post.slug}`,
-      images: [
-        {
-          url: `https://www.puang.in/og/blog?title=${post.metadata.title}`,
-        },
-      ],
-    },
-    twitter: {
-      title: post.metadata.title,
-      description: post.metadata.description,
-      card: "summary_large_image",
-      creator: "@puangg59",
-      images: [
-        `https://www.puang.in/og/blog?title=${post.metadata.title}&top=${publishedTime}`,
-      ],
-    },
-  };
+	const image = `/og/blog?${new URLSearchParams({
+		title: post.metadata.title,
+		top: publishedTime,
+	})}`;
+
+	return {
+		title: post.metadata.title,
+		description: post.metadata.description,
+		alternates: { canonical: `/blog/${post.slug}` },
+		openGraph: {
+			title: post.metadata.title,
+			description: post.metadata.description,
+			publishedTime: new Date(post.metadata.date).toISOString(),
+			authors: [site.name],
+			type: "article",
+			url: `/blog/${post.slug}`,
+			images: [{ url: image, width: 1200, height: 630 }],
+		},
+		twitter: {
+			title: post.metadata.title,
+			description: post.metadata.description,
+			card: "summary_large_image",
+			creator: site.twitter,
+			images: [image],
+		},
+	};
 }
 
 export default async function Post({
-  params,
+	params,
 }: {
-  params: Promise<SlugParams>;
+	params: Promise<SlugParams>;
 }) {
-  const { slug } = await params;
-  const post = getPostBySlug(slug);
-  if (!post) {
-    notFound();
-  }
+	const { slug } = await params;
+	const post = getPostBySlug(slug);
+	if (!post) {
+		notFound();
+	}
 
-  return (
-    <section className="animate-fade-in-up max-w-4xl mx-auto px-6 font-mono text-md mt-5 p-8">
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            headline: post.metadata.title,
-            datePublished: post.metadata.date,
-            dateModified: post.metadata.date,
-            description: post.metadata.description,
-            image: `https://www.puang.in/og/blog?title=${
-              post.metadata.title
-            }&top=${formatDate(post.metadata.date)}`,
-            url: `https://www.puang.in/blog/${post.slug}`,
-            author: {
-              "@type": "Person",
-              name: "Karan Kumar",
-            },
-          }),
-        }}
-      />
-      <BackButton />
-      <h1 className="text-4xl font-bold mb-4 mt-2 text-white">
-        {post.metadata.title}
-      </h1>
-      <div className="mb-8 flex items-center justify-between text-sm text-gray-400">
-        <time className="text-gray-500 mt-2 block">
-          {formatDate(post.metadata.date)}
-        </time>
-      </div>
-      <article className="prose prose-lg dark:prose-invert max-w-none text-gray-400 my-6 leading-10">
-        <MDX source={post.content} />
-      </article>
-    </section>
-  );
+	return (
+		<Frame>
+			<script
+				type="application/ld+json"
+				suppressHydrationWarning
+				dangerouslySetInnerHTML={{
+					__html: JSON.stringify({
+						"@context": "https://schema.org",
+						"@type": "BlogPosting",
+						headline: post.metadata.title,
+						datePublished: post.metadata.date,
+						dateModified: post.metadata.date,
+						description: post.metadata.description,
+						image: `https://www.puang.in/og/blog?title=${
+							post.metadata.title
+						}&top=${formatDate(post.metadata.date)}`,
+						url: `https://www.puang.in/blog/${post.slug}`,
+						author: {
+							"@type": "Person",
+							name: "Karan Kumar",
+						},
+					}),
+				}}
+			/>
+			<PageHeader
+				backLink={
+					<OriginBackLink href="/blog" label="writing" homeHref="/#writing" />
+				}
+				trail={formatDate(post.metadata.date).toLowerCase()}
+			/>
+			<Section className="px-5 pt-10 pb-8 sm:px-8">
+				<Rise delay={0.06}>
+					<h1 className="font-semibold text-[28px] text-foreground leading-tight tracking-tight">
+						{post.metadata.title}
+					</h1>
+					{post.metadata.description && (
+						<p className="mt-3 text-[15px] text-muted leading-relaxed">
+							{post.metadata.description}
+						</p>
+					)}
+				</Rise>
+			</Section>
+			<Section divider="line" className="px-5 py-10 sm:px-8">
+				<Reveal delay={0.1}>
+					<article className="text-[15px] text-muted leading-8">
+						<MDX source={post.content} />
+					</article>
+				</Reveal>
+			</Section>
+			<Footer />
+		</Frame>
+	);
 }
 
 function formatDate(date: string) {
-  return new Date(date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+	return new Date(date).toLocaleDateString("en-US", {
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+	});
 }

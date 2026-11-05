@@ -1,55 +1,30 @@
 "use client";
 
-import React, { type ReactNode, useEffect, useState } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 
-interface TransitionWrapperProps {
-  children: ReactNode;
-}
-
+// Blurs the page out briefly while TransitionLink navigates.
 export default function TransitionWrapper({
-  children,
-}: TransitionWrapperProps) {
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [isInitialLoad, setIsInitialLoad] = useState(true);
+	children,
+}: { children: ReactNode }) {
+	const [isTransitioning, setIsTransitioning] = useState(false);
 
-  useEffect(() => {
-    if (isInitialLoad) {
-      setTimeout(() => {
-        setIsInitialLoad(false);
-      }, 100);
-    }
+	useEffect(() => {
+		const start = () => setIsTransitioning(true);
+		const complete = () => setTimeout(() => setIsTransitioning(false), 30);
 
-    const handleRouteChangeStart = () => {
-      setIsTransitioning(true);
-    };
+		window.addEventListener("pageTransitionStart", start);
+		window.addEventListener("pageTransitionComplete", complete);
+		return () => {
+			window.removeEventListener("pageTransitionStart", start);
+			window.removeEventListener("pageTransitionComplete", complete);
+		};
+	}, []);
 
-    const handleRouteChangeComplete = () => {
-      setTimeout(() => {
-        setIsTransitioning(false);
-      }, 50);
-    };
-
-    window.addEventListener("pageTransitionStart", handleRouteChangeStart);
-    window.addEventListener(
-      "pageTransitionComplete",
-      handleRouteChangeComplete
-    );
-
-    return () => {
-      window.removeEventListener("pageTransitionStart", handleRouteChangeStart);
-      window.removeEventListener(
-        "pageTransitionComplete",
-        handleRouteChangeComplete
-      );
-    };
-  }, [isInitialLoad]);
-
-  return (
-    <div
-      className={`transition-wrapper ${isTransitioning ? "page-transition" : ""
-        } ${isInitialLoad ? "initial-load" : ""}`}
-    >
-      {children}
-    </div>
-  );
+	return (
+		<div
+			className={`transition-wrapper ${isTransitioning ? "page-transition" : ""}`}
+		>
+			{children}
+		</div>
+	);
 }

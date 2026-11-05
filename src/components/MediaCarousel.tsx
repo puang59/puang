@@ -6,43 +6,31 @@ import {
 	RiCloseLine,
 	RiZoomInLine,
 } from "@remixicon/react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import type { MediaItem } from "./Projects";
 
-declare global {
-	interface Window {
-		twttr?: {
-			widgets: { load: (el?: HTMLElement) => void };
-		};
-	}
-}
+// Tweets are rendered separately as cards, so the carousel only shows media.
+type ShowcaseItem = Exclude<MediaItem, { type: "tweet" }>;
 
 export function MediaCarousel({
 	media,
 	title,
 }: {
-	media: MediaItem[];
+	media: ShowcaseItem[];
 	title: string;
 }) {
 	const [index, setIndex] = useState(0);
 	const [lightboxOpen, setLightboxOpen] = useState(false);
 	const [mounted, setMounted] = useState(false);
-	const tweetRef = useRef<HTMLDivElement>(null);
 
 	const current = media[index];
 
 	useEffect(() => {
 		setMounted(true);
 	}, []);
-
-	useEffect(() => {
-		if (current?.type === "tweet") {
-			window.twttr?.widgets.load(tweetRef.current ?? undefined);
-		}
-	}, [current]);
 
 	useEffect(() => {
 		if (!lightboxOpen) return;
@@ -79,7 +67,7 @@ export function MediaCarousel({
 
 	return (
 		<>
-			<div className="relative aspect-video w-full overflow-hidden border border-zinc-800 bg-zinc-950">
+			<div className="group relative aspect-video w-full overflow-hidden rounded-lg border border-line bg-raised">
 				{current.type === "image" && (
 					<button
 						type="button"
@@ -94,8 +82,8 @@ export function MediaCarousel({
 							sizes="(max-width: 768px) 100vw, 768px"
 							className="object-cover"
 						/>
-						<span className="absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 transition-all duration-200 group-hover/image:bg-black/30 group-hover/image:opacity-100">
-							<span className="flex h-9 w-9 items-center justify-center bg-black/70 text-gray-200">
+						<span className="absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 transition-all duration-500 ease-soft group-hover/image:bg-black/25 group-hover/image:opacity-100">
+							<span className="flex h-9 w-9 items-center justify-center rounded-full bg-background/70 text-foreground backdrop-blur">
 								<RiZoomInLine size={18} />
 							</span>
 						</span>
@@ -126,32 +114,13 @@ export function MediaCarousel({
 					/>
 				)}
 
-				{current.type === "tweet" && (
-					<div
-						ref={tweetRef}
-						key={current.id}
-						className="twitter-embed-scroll flex h-full w-full justify-center overflow-y-auto bg-black px-1 py-1"
-					>
-						<blockquote
-							className="twitter-tweet"
-							data-theme="dark"
-							data-dnt="true"
-							data-conversation="none"
-						>
-							<a href={`https://twitter.com/notpuang/status/${current.id}`}>
-								View post on X
-							</a>
-						</blockquote>
-					</div>
-				)}
-
 				{media.length > 1 && (
 					<>
 						<button
 							type="button"
 							aria-label="Previous media"
 							onClick={(e) => goTo(index - 1, e)}
-							className="-translate-y-1/2 absolute top-1/2 left-2 z-10 flex h-8 w-8 items-center justify-center bg-black/70 text-gray-300 opacity-80 transition-colors duration-200 hover:bg-black/90 hover:text-green-300 focus:opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
+							className="-translate-y-1/2 absolute top-1/2 left-2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-background/70 text-muted opacity-80 backdrop-blur transition-all duration-300 ease-soft hover:bg-background/90 hover:text-foreground focus:opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
 						>
 							<RiArrowLeftSLine size={18} />
 						</button>
@@ -159,7 +128,7 @@ export function MediaCarousel({
 							type="button"
 							aria-label="Next media"
 							onClick={(e) => goTo(index + 1, e)}
-							className="-translate-y-1/2 absolute top-1/2 right-2 z-10 flex h-8 w-8 items-center justify-center bg-black/70 text-gray-300 opacity-80 transition-colors duration-200 hover:bg-black/90 hover:text-green-300 focus:opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
+							className="-translate-y-1/2 absolute top-1/2 right-2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-background/70 text-muted opacity-80 backdrop-blur transition-all duration-300 ease-soft hover:bg-background/90 hover:text-foreground focus:opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
 						>
 							<RiArrowRightSLine size={18} />
 						</button>
@@ -175,8 +144,10 @@ export function MediaCarousel({
 										type="button"
 										aria-label={`Go to slide ${i + 1}`}
 										onClick={(e) => goTo(i, e)}
-										className={`h-1.5 w-1.5 transition-colors duration-200 ${
-											i === index ? "bg-green-300" : "bg-gray-500"
+										className={`h-1.5 rounded-full transition-all duration-500 ease-soft ${
+											i === index
+												? "w-4 bg-foreground"
+												: "w-1.5 bg-foreground/35"
 										}`}
 									/>
 								);
@@ -190,15 +161,15 @@ export function MediaCarousel({
 				createPortal(
 					<AnimatePresence>
 						{lightboxOpen && current.type === "image" && (
-							<motion.div
+							<m.div
 								initial={{ opacity: 0 }}
 								animate={{ opacity: 1 }}
 								exit={{ opacity: 0 }}
 								transition={{ duration: 0.18 }}
 								onClick={closeLightbox}
-								className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 sm:p-10"
+								className="fixed inset-0 z-[100] flex items-center justify-center bg-background/90 p-4 backdrop-blur-sm sm:p-10"
 							>
-								<motion.div
+								<m.div
 									initial={{ scale: 0.85, opacity: 0 }}
 									animate={{ scale: 1, opacity: 1 }}
 									exit={{ scale: 0.9, opacity: 0 }}
@@ -209,18 +180,18 @@ export function MediaCarousel({
 									<img
 										src={current.src}
 										alt={current.alt}
-										className="max-h-[85vh] w-full object-contain"
+										className="max-h-[85vh] w-full rounded-lg object-contain"
 									/>
 									<button
 										type="button"
 										aria-label="Close"
 										onClick={closeLightbox}
-										className="-top-3 -right-3 absolute flex h-9 w-9 items-center justify-center border border-zinc-700 bg-black text-gray-300 transition-colors hover:border-green-300 hover:text-green-300"
+										className="-top-3 -right-3 absolute flex h-9 w-9 items-center justify-center rounded-full border border-edge bg-background text-muted transition-colors hover:text-foreground"
 									>
 										<RiCloseLine size={18} />
 									</button>
-								</motion.div>
-							</motion.div>
+								</m.div>
+							</m.div>
 						)}
 					</AnimatePresence>,
 					document.body,
